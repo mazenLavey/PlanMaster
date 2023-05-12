@@ -1,0 +1,27 @@
+
+@import "mixins";
+
+.wrapper {
+    flex-grow: 1;
+
+    .header {
+        @include flex-row(false);
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+    
+        .title {
+            color: red;
+            text-transform: capitalize;
+        }
+    }
+
+    .list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1rem;
+    }
+}
+

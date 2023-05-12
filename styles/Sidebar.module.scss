@@ -1,0 +1,9 @@
+
+@import 'mixins';
+
+.wrapper {
+    @include flex-column(false);
+    gap: 10px;
+    min-height: 100vh;
+    padding: 1rem;    
+}

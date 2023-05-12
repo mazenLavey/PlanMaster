@@ -1,0 +1,15 @@
+
+@import 'mixins';
+
+.wrapper {
+    @include flex-row(false);
+    justify-content: space-between;
+    background-color: #111;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    color: white;
+
+    .buttons {
+        @include flex-column(true);
+    }
+}

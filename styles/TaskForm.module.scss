@@ -1,0 +1,17 @@
+
+@import "mixins";
+
+.wrapper {
+    @include flex-column(false);
+    gap: 5px;
+}
+
+.subTasksContainer {
+    @include flex-column(false);
+    gap: 2px;
+
+    .subTask {
+        @include flex-row(false);
+        gap: 5px;
+    }
+}

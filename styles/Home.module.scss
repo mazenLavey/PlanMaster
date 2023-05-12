@@ -1,0 +1,17 @@
+
+@import 'mixins';
+@import "variables";
+
+
+.header {
+    @include flex-column(true);
+    text-align: center;
+    
+    .text {
+        color: rgba(255, 187, 0, 0.87);
+    }
+
+    .paragraph {
+        max-width: 500px;
+    }
+}

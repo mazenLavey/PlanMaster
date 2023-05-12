@@ -1,0 +1,7 @@
+
+@import 'mixins';
+
+.wrapper {
+    @include flex-column(false);
+    gap: 5px;
+}
