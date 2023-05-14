@@ -1,37 +1,33 @@
 
 
-type SubTaskStatus = true | false;
-type PlanStatus = true | false;
-export type TaskStatus = "toDo" | "inProcess" | "done";
-export type OperationType = "next" | "back" | "done" | "undo" ;
+export type TaskStage = "toDo" | "inProcess" | "done";
+export type OperationType = "start" | "stop" | "done" | "undo" | "delete";
 
 export interface PlanType {
     readonly id: string,
     readonly timeStamp: number;
-    readonly status: PlanStatus,
+    status: boolean,
     title: string,
     description: string,
     deadline: string,
-    toDo: TaskType[],
-    inProcess: TaskType[],
-    done: TaskType[],
+    tasks: TaskType[],
 }
 
 export interface TaskType {
     readonly id: string,
     title: string,
     taskDescription: string,
-    status: TaskStatus,
+    stage: TaskStage,
     subTasks: SubTask[]
 }
 
 export interface SubTask {
     readonly id: string,
     title: string,
-    status: SubTaskStatus
+    status: boolean
 }
 
-export interface TasksSectionProps {
-    currentTaskData: TaskType[] | undefined,
-    planId: string
-}
+// export interface TasksSectionProps {
+//     currentTaskData: TaskType[] | undefined,
+//     planId: string
+// }

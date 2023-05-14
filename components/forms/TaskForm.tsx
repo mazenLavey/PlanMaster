@@ -24,7 +24,7 @@ const TaskForm: React.FC<Props> = ({currentPlanId, taskData, action, closePopup}
         title: taskData?.title || "",
         taskDescription: taskData?.taskDescription || "",
         subTasks: taskData?.subTasks || [],
-        status: taskData?.status || "toDo"
+        stage: taskData?.stage || "toDo"
     });
 
     useEffect(()=>{
@@ -98,7 +98,7 @@ const TaskForm: React.FC<Props> = ({currentPlanId, taskData, action, closePopup}
             addNewTask(formData, currentPlanId);
             closePopup? closePopup(): null;
         } else if (action === "edit") {
-            updataTask(currentPlanId, formData.id, formData, formData.status);
+            updataTask(currentPlanId, formData);
         }
     };
 

@@ -2,14 +2,16 @@
 
 import { useContext } from "react";
 import { PlansContext } from "@/contexts/PlansContext";
-import CurrentPlan from "@/components/others/CurrentPlan";
+import CurrentPlan from "@/app/dashboard/CurrentPlan";
 
 const PlanConstructor: React.FC = ()=>{
     const {currentPlan} = useContext(PlansContext);
 
     return (
         <>{
-            currentPlan? <CurrentPlan currentPlanData={currentPlan} />:
+            currentPlan? 
+            <CurrentPlan currentPlanData={currentPlan} />
+            :
             <div>
                 No Plans
             </div>

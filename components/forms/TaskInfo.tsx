@@ -1,6 +1,7 @@
 'use client';
 
 import { PlansContext } from "@/contexts/PlansContext";
+import { SubTask } from "@/types/interfaces";
 import { TaskType } from "@/types/interfaces";
 import { useContext, useState } from "react";
 
@@ -10,12 +11,12 @@ interface Props {
 }
 
 const TaskInfo: React.FC<Props> = ({taskData, planId}) => {
-    const [formData, setFormData] = useState<TaskType>(taskData);
+    const [task] = useState<TaskType>(taskData);
     const {updataTask} = useContext(PlansContext);
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>): void {
         const {id, checked} = e.target;
-        const updateSubTasks = formData.subTasks.map(subtask => {
+        const updateSubTasks: SubTask[] = task.subTasks.map(subtask => {
             if(subtask.id === id) {
                 return {
                     ...subtask,
@@ -26,23 +27,20 @@ const TaskInfo: React.FC<Props> = ({taskData, planId}) => {
             }
         });
 
-        setFormData(prevValue => {
-            return {
-                ...prevValue,
-                subTasks: updateSubTasks
-            }
-        });
+        const allSubtasksDone = updateSubTasks.every(subtask => subtask.status === true);
+
+        const updatedTask: TaskType = {
+            ...task,
+            stage: allSubtasksDone? "done": task.stage,
+            subTasks: updateSubTasks
+        };
+        updataTask( planId , updatedTask);
     };
 
-    function handleClick(e: React.MouseEvent<HTMLButtonElement>): void {
-        e.stopPropagation();
-        updataTask( planId , formData.id, formData, formData.status);
-    };
-
-    const subTaskElements = formData.subTasks.map(el =>{
+    const subTaskElements = task.subTasks.map(el =>{
         return (
             <div key={el.id}>
-                <input type="checkbox" name={el.id} id={el.id} checked={el.status} onChange={handleChange} />
+                <input type="checkbox" name={el.id} id={el.id} checked={el.status} onChange={handleChange} disabled={task.stage === "toDo" || task.stage === "done"? true: false}/>
                 <label htmlFor={el.id}>{el.title}</label>
             </div>
         );
@@ -50,10 +48,9 @@ const TaskInfo: React.FC<Props> = ({taskData, planId}) => {
 
     return (
         <div>
-            <h5>{formData.title}</h5>
-            <p>{formData.taskDescription}</p>
+            <h5>{task.title}</h5>
+            <p>{task.taskDescription}</p>
             {subTaskElements}
-            <button onClick={handleClick}>save</button>
         </div>
     );
 };

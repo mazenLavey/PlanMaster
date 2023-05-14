@@ -2,7 +2,7 @@
 @import 'mixins';
 
 .wrapper {
-    @include flex-row(false);
+    @include flex-column(false);
     justify-content: space-between;
     background-color: #111;
     padding: 0.5rem;
