@@ -1,8 +1,7 @@
-
-
 @mixin flex-row($center) {
     display: flex;
     flex-flow: row nowrap;
+
     @if $center {
         align-items: center;
         justify-content: center;
@@ -12,6 +11,7 @@
 @mixin flex-column($center) {
     display: flex;
     flex-flow: column nowrap;
+
     @if $center {
         align-items: center;
         justify-content: center;

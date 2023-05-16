@@ -2,6 +2,9 @@
 
 import { SubTask } from "@/types/interfaces";
 import { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import styles from "@/styles/SubTaskSlot.module.scss";
 
 interface Props {
     slotId: string,
@@ -29,9 +32,11 @@ const SubTaskSlot: React.FC<Props> = ({slotId, subtaskData, updateSubTasks, dele
     };
 
     return (
-        <div style={{display: "flex", gap: "3px"}}>
+        <div className={styles.wrapper}>
             <input type="text" name={slotId} id={slotId} onChange={handleChange} value={inputData.title} required/>
-            <button type="button" onClick={deleteSubTask}>X</button>
+            <button type="button" onClick={deleteSubTask}>
+                <FontAwesomeIcon icon={faXmark} width={20}/>
+            </button>
         </div>
     );
 };

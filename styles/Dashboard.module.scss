@@ -1,6 +1,13 @@
-@import 'mixins';
+@use 'mixins' as *;
+@use 'variables' as *;
 
 .wrapper {
-    @include flex-row(false);
-    
+    @include flex-column(false);
+    gap: $gap-s;
+}
+
+@media (min-width: 576px) {
+    .wrapper {
+        gap: $gap-l;
+    }
 }

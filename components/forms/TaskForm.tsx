@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { TaskType, SubTask } from "@/types/interfaces";
 import { nanoid } from "nanoid";
 import styles from "@/styles/TaskForm.module.scss";
+import stylesBtns from "@/styles/Buttons.module.scss";
 import SubTaskSlot from "@/components/forms/SubTaskSlot";
 
 type action = "edit" | "new"
@@ -104,19 +105,21 @@ const TaskForm: React.FC<Props> = ({currentPlanId, taskData, action, closePopup}
 
     return (
         <form onSubmit={handleSubmit} className={styles.wrapper}>
-            <label htmlFor="title">title</label>
-            <input type="text" name="title" id="title" value={formData.title} onChange={handleChange} required/>
+            <div className={styles.form}>
+                <label htmlFor="title">title</label>
+                <input type="text" name="title" id="title" value={formData.title} onChange={handleChange} required/>
 
-            <label htmlFor="taskDescription">shortly description the task</label>
-            <textarea name="taskDescription" id="taskDescription" value={formData.taskDescription} onChange={handleChange} required/>
-            <fieldset>
-                <legend>subTasks</legend>
-                <div className={styles.subTasksContainer}>
-                    {subTasksArray.map(el => <SubTaskSlot key={el.id} slotId={el.id} subtaskData={el} updateSubTasks={updateSubTasks} deleteSubTask={()=>deleteSubTask(el.id)}/>)}
-                </div>
-                <button type="button" onClick={addNewSubTaskField}>+ add subTask</button>
-            </fieldset>
-            <button>{action === "new"? "add": "save"}</button>
+                <label htmlFor="taskDescription">shortly description the task</label>
+                <textarea name="taskDescription" id="taskDescription" value={formData.taskDescription} onChange={handleChange} required/>
+                <fieldset>
+                    <legend>SubTasks</legend>
+                    <div className={styles.subTasksContainer}>
+                        {subTasksArray.map(el => <SubTaskSlot key={el.id} slotId={el.id} subtaskData={el} updateSubTasks={updateSubTasks} deleteSubTask={()=>deleteSubTask(el.id)}/>)}
+                    </div>
+                    <button type="button" onClick={addNewSubTaskField} className={styles.addTaskBtn}>+ add subtask</button>
+                </fieldset>
+            </div>
+            <button className={stylesBtns.button}>{action === "new"? "add": "save"}</button>
         </form>
     );
 };

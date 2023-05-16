@@ -1,27 +1,73 @@
 
-@import "mixins";
+@use "mixins" as *;
+@use "variables" as *;
 
 .wrapper {
+    @include flex-column(false);
+    gap: $gap-s;
     flex-grow: 1;
-
+    padding: $padding-l;
+    background-color: $white;
+    border-radius: $radius-l;
+    box-shadow: 0 5px 5px $shadow-light;
+    
     .header {
         @include flex-row(false);
         justify-content: space-between;
         align-items: center;
-        padding: 1rem;
-    
+
         .title {
-            color: red;
+            text-transform: capitalize;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 500px;
+        }
+    }
+    
+    .limitation {
+        @include flex-row(false);
+        justify-content: space-between;
+        align-items: center;
+        gap: $gap-s;
+        font-size: var(--font-200);
+        color: $font-dark-gray;
+
+        & span::first-letter {
             text-transform: capitalize;
         }
     }
 
+    .info {
+        .description {
+            color: $font-dark-gray;
+            font-size: var(--font-300);
+
+            &::first-letter {
+                text-transform: capitalize;
+            }
+        }
+    }
+
+    .badge {
+        @include flex-row(true);
+        gap: $gap-xs;
+        width: fit-content;
+        padding: 0.25rem $padding-s;
+        border-radius: $radius-m;
+        font-size: var(--font-200);
+        color: $font-white;
+        background-color: $orange-0;
+        text-transform: capitalize;
+    }
+
     .list {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         justify-content: space-between;
-        gap: 1rem;
-        padding: 1rem;
+        gap: $gap-l;
+        flex-grow: 1;
+        margin-top: 1rem;
     }
 }
 

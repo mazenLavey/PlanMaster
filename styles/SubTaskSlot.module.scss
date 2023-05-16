@@ -1,0 +1,20 @@
+
+@use "mixins" as *;
+@use "variables" as *;
+
+.wrapper {
+    @include flex-row(true);
+    gap: $gap-s;
+
+    input {
+        flex-grow: 1;
+    }
+
+    button {
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+}

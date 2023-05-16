@@ -1,9 +1,11 @@
 
-@import 'mixins';
+@use 'mixins' as *;
+@use 'variables' as *;
+
 
 .wrapper {
     @include flex-column(false);
-    gap: 10px;
-    min-height: 100vh;
-    padding: 1rem;    
+    justify-content: space-between;
+    gap: $gap-l;
+    width: 100%;    
 }

@@ -1,5 +1,6 @@
-import '../styles/globals.css';
+import '@/styles/globals.scss';
 import { PlansProvider } from '@/contexts/PlansContext';
+import Nav from '@/components/layouts/Nav';
 
 export const metadata = {
   title: 'Track plan',
@@ -15,7 +16,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <PlansProvider>
-          {children}
+          <Nav />
+          <div className='container'>
+            {children}
+          </div>
         </PlansProvider>
         <div id='popupPortal'></div>
       </body>

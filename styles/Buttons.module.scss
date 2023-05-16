@@ -1,0 +1,26 @@
+
+@use "mixins" as *;
+@use "variables" as *;
+
+.button {
+    @include flex-row(true);
+    gap: $gap-xs;
+    min-width: 70px;
+    padding: $padding-s $padding-m;
+    border-radius: $radius-l;
+    color: $font-white;
+    background-color: $orange-0;
+    text-transform: capitalize;
+    font-size: var(--font-300);
+    cursor: pointer;
+
+    &:active {
+        scale: 0.98;
+    }
+
+    @media (min-width: 576px) {
+        &:hover {
+            background-color: $orange-1;
+        }
+    }
+}

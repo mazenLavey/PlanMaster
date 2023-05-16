@@ -1,6 +1,9 @@
 import Popup from "@/components/others/Popup";
 import TaskForm from "@/components/forms/TaskForm";
 import { useToggle } from "@/hooks/useToggle";
+import styles from "@/styles/Buttons.module.scss";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
     currentPlanId: string
@@ -15,7 +18,10 @@ const AddNewTask: React.FC<Props>= ({currentPlanId})=>{
     }
     return (
         <>
-        <button onClick={handleClick}>Add New Task</button>
+        <button onClick={handleClick} className={styles.button}>
+            <FontAwesomeIcon icon={faPlus} width={15}/>
+            task
+        </button>
         {showPopup && 
             <Popup closePopup={() => handleToggle(false)}>
                 <TaskForm currentPlanId={currentPlanId} closePopup={() => handleToggle(false)} action="new"/>

@@ -2,6 +2,13 @@ import Popup from "@/components/others/Popup";
 import PlanForm from "@/components/forms/PlanForm";
 import { PlanType } from "@/types/interfaces";
 import { useToggle } from "@/hooks/useToggle";
+import styles from "@/styles/PlanCard.module.scss";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import dateFormat from "@/functions/dateFormat";
+import ProgressBar from "@/components/others/ProgressBar";
+import getRandomColors from "@/functions/getRandomColors";
 
 interface Props {
     data: PlanType,
@@ -11,19 +18,43 @@ interface Props {
 
 const PlanCard: React.FC<Props> = ({data, showPlan, deletePlan}) => {
     const [showPopup, handleToggle] = useToggle();
+    const creationDate = dateFormat(data.timeStamp);
+    const tasksSum: number = data.tasks.length;
+    const doneTasks: number = (data.tasks.filter(task => task.stage === "done")).length;
+    const barWidth: number = (doneTasks/tasksSum)*100;
+
+    function handleDelete(e: React.MouseEvent<HTMLButtonElement>): void {
+        e.stopPropagation();
+        deletePlan();
+    }
 
     return (
-        <div>
-            <div onClick={() => showPlan(data)}>{data.title}</div>
-            <button onClick={()=> handleToggle()}>edit</button>
-            <button onClick={deletePlan}>delete</button>
-            
-            {showPopup && 
-            <Popup closePopup={() => handleToggle(false)}>
-                <PlanForm data={data} closePopup={() => handleToggle(false)}/>
-            </Popup>
-            }
+        <>
+        <div className={styles.wrapper} onClick={() => showPlan(data)}>
+            <div className={styles.info}>
+                <h3>{data.title}</h3>
+                <div className={styles.btnContainer}>
+                    <button onClick={()=> handleToggle()}>
+                        <FontAwesomeIcon icon={faPen} />
+                    </button>
+                    <button onClick={handleDelete}>
+                        <FontAwesomeIcon icon={faTrashCan} />
+                    </button>
+                </div>
+            </div>
+            <div className={styles.progress}>
+                <p>{doneTasks} of {tasksSum} Tasks { barWidth === 100 && <FontAwesomeIcon icon={faCircleCheck} size="sm" style={{color: "#34C759"}}/>}</p>
+                <ProgressBar barWidth={barWidth} startColor={data.colors[0]} endColor={data.colors[1]}/>
+                <span className={styles.date}>{creationDate}</span>
+            </div>
         </div>
+        
+        {showPopup && 
+        <Popup closePopup={() => handleToggle(false)}>
+            <PlanForm data={data} closePopup={() => handleToggle(false)}/>
+        </Popup>
+        }
+        </>
     );
 };
 

@@ -1,15 +1,59 @@
 
-@import 'mixins';
+@use 'mixins' as *;
+@use 'variables' as *;
 
 .wrapper {
     @include flex-column(false);
-    justify-content: space-between;
-    background-color: #111;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    color: white;
+    padding: $padding-m;
+    border-radius: $radius-l;
+    background-image: linear-gradient(150deg, $orange-0 50%, $orange-2);
+    box-shadow: 0 3px 5px $shadow-dark;
 
     .buttons {
-        @include flex-column(true);
+        @include flex-row(false);
+        width: 100%;
+        height: 30px;
+        border-radius: $radius-l;
+        box-shadow: 0 2px 5px #ce6547;
+        overflow: hidden;
+
+        button, .done {
+            @include flex-row(true);
+            gap: $gap-s;
+            background-color: $white;
+            color: $font-black;
+            width: 100%;
+            padding: $padding-s;
+            text-transform: capitalize;
+            font-weight: bold;
+            font-size: var(--font-200);
+            cursor: pointer;
+
+            &:active {
+                scale: 0.98;
+            }
+
+            &:hover {
+                opacity: 0.7;
+            }
+
+            &:not(:last-of-type) {
+                border-right: 1px solid #b3b3b3;
+            }
+
+            &.btnDisabled {
+                background-color: $black-2;
+                cursor: default;
+                pointer-events: none;
+            }
+
+        }
+        .done {
+            background-color: $green;
+            cursor: default;
+            &:hover {
+                opacity: 1;
+            }
+        }
     }
 }

@@ -1,0 +1,55 @@
+
+
+@use "mixins" as *;
+@use "variables" as *;
+
+.wrapper {
+    @include flex-column(false);
+    .header {
+        @include flex-row(false);
+        justify-content: space-between;
+        align-items: center;
+        gap: $gap-s;
+        padding: $padding-s $padding-l;
+        width: 100%;
+
+        .title {
+            font-size: var(--font-600);
+            text-transform: capitalize;
+        }
+
+    }
+
+    .plansContainer {
+        @include flex-row(false);
+        gap: $gap-s;
+        padding-bottom: 1rem;
+        overflow-x: auto;
+        scrollbar-width: thin;
+        scrollbar-color: $orange-0 $gray-3;
+    
+        &::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $orange-0;
+            border-radius: 10px;
+        }
+        
+        &::-webkit-scrollbar-track {
+            background: $gray-3;
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background-color: $orange-2;
+        }
+    }
+
+    .mobileScreen {
+        overflow: hidden;
+        padding-bottom: 2.5rem;
+    }
+
+}

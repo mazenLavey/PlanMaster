@@ -1,5 +1,5 @@
 import TaskCard from '@/components/cards/TaskCard';
-import styles from '@/styles/Tasks.module.scss';
+import styles from '@/styles/TaskSection.module.scss';
 import { nanoid } from "nanoid";
 import { PlanType, TaskStage } from '@/types/interfaces';
 
@@ -9,9 +9,14 @@ interface Props {
 }
 
 const TaskSection: React.FC<Props> = ({currentPlanData, section})=>{
+    const taskSum = currentPlanData.tasks.filter(task => task.stage === section).length;
+
     return (
-        <section>
-            <h3>{section === "toDo" ? "To Do": section === "inProcess"? "In Process" : "Done"}</h3>
+        <section className={styles.wrapper}>
+            <div className={styles.title}>
+                <h3 className={styles.text}>{section === "toDo" ? `To Do`: section === "inProcess"? `In Process` : `Done`}</h3>
+                <span className={`${styles.circle} ${section === "toDo" ? "": section === "inProcess"? styles.inProcess : styles.done}` }>{taskSum > 0? taskSum : 0}</span>
+            </div>
             <div className={styles.tasks}>
             {currentPlanData?.tasks.map(el => {
                 if(el.stage === section) {

@@ -3,6 +3,7 @@
 import { createContext, useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { PlanType, TaskType} from "@/types/interfaces";
+import getRandomColors from "@/functions/getRandomColors";
 
 type Props = {
     children: React.ReactNode
@@ -36,12 +37,20 @@ const PlansContext = createContext<PlansContextType>({
 const PlansProvider: React.FC<Props> = ({children}) => {
     const [allPlans, setAllPlans] = useState<PlanType[]>([]);
     const [currentPlan, setCurrentPlan] = useState<PlanType | undefined>(undefined);
-    
+
     useEffect(()=>{
-        setCurrentPlan(oldValue => {
-            const updataCurrent = allPlans.find(plan => plan.id === oldValue?.id);
-            return updataCurrent;
-        })
+        if(allPlans.length > 0) {
+            setCurrentPlan(oldPlan => {
+                const updataCurrent: PlanType | undefined = allPlans.find(plan => plan.id === oldPlan?.id);
+                if(updataCurrent) {
+                    return updataCurrent;
+                } else if(updataCurrent === undefined) {
+                    return allPlans[allPlans.length -1];
+                } 
+            });
+        } else {
+            setCurrentPlan(undefined);
+        }
     }, [allPlans]);
 
     function addNewPlan(): void {
@@ -54,6 +63,7 @@ const PlansProvider: React.FC<Props> = ({children}) => {
             description: "descript your plan",
             deadline: "",
             tasks: [],
+            colors: getRandomColors()
         };
         setAllPlans(prevPlans => [...prevPlans, newPlan]);
         setCurrentPlan(newPlan);
@@ -83,10 +93,7 @@ const PlansProvider: React.FC<Props> = ({children}) => {
     };
 
     function deletePlan(planId: string):void {
-        // delete from plans array
         setAllPlans(prevPlans => prevPlans.filter(plan => plan.id !== planId));
-        // delete from current plan state
-        setCurrentPlan(prevValue => prevValue?.id === planId? undefined : prevValue);
     };
 
     function addNewTask(taskData: TaskType, planId: string): void {

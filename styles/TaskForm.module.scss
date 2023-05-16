@@ -1,17 +1,58 @@
 
-@import "mixins";
+@use "mixins" as *;
+@use "variables" as *;
 
 .wrapper {
     @include flex-column(false);
-    gap: 5px;
-}
+    gap: $gap-l;
 
-.subTasksContainer {
-    @include flex-column(false);
-    gap: 2px;
+    .form {
+        @include flex-column(false);
+        gap: $gap-s;
 
-    .subTask {
-        @include flex-row(false);
-        gap: 5px;
+        label {
+            font-size: var(--font-400);
+            &::first-letter {
+                text-transform: capitalize;
+            }
+        }
+
+        input, textarea {
+            padding: $padding-s;
+            border-radius: $radius-s;
+            background-color: $gray-4;
+            color: $font-dark-gray;
+            border: 1px solid transparent;
+    
+            &:focus {
+                background-color: $white;
+                border-color: $orange-0;
+                color: $font-black;
+            }
+        }
+
+        input {
+            height: 2rem;
+        }
+
+        fieldset {
+            margin-top: 1rem;
+
+            legend {
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        .addTaskBtn {
+            margin-top: 0.5rem;
+            color: $orange-0;
+            text-transform: capitalize;
+            cursor: pointer;
+        }
+    }
+
+    .subTasksContainer {
+        @include flex-column(false);
+        gap: $gap-s;
     }
 }

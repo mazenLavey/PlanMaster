@@ -1,0 +1,9 @@
+
+@use "variables" as *;
+
+.emptyBox {
+    border-radius: $radius-l;
+    background-color: $white;
+    padding: $padding-l;
+    flex-grow: 1;
+}

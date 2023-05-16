@@ -1,0 +1,16 @@
+
+@use "mixins" as *;
+@use "variables" as *;
+
+.navbar {
+    background-color: $white;
+    padding: $padding-m;
+    height: 60px;
+
+    .wrapper {
+        @include flex-row(false);
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+    }
+}

@@ -1,5 +1,7 @@
 import styles from '@/styles/Popup.module.scss';
 import ReactDOM  from 'react-dom'; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
     children: React.ReactNode,
@@ -13,7 +15,9 @@ const Popup: React.FC<Props> = ({closePopup, children})=>{
         return ReactDOM.createPortal(
             <div className={styles.layer}>
                 <div className={styles.box}>
-                    <span onClick={closePopup}>close</span>
+                    <span onClick={closePopup} className={styles.closeBtn}>
+                        <FontAwesomeIcon icon={faCircleXmark} width={20}/>
+                    </span>
                     {children}
                 </div>
             </div>,
