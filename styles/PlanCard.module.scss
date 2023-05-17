@@ -8,7 +8,7 @@
     padding: $padding-m;
     border-radius: $radius-l;
     background-color: $white;
-    width: 200px;
+    min-width: 200px;
     cursor: pointer;
     box-shadow: 0 5px 5px $shadow-light;
     transition: 0.3s;
@@ -43,6 +43,10 @@
         .btnContainer {
             @include flex-row(true);
             gap: $gap-l;
+
+            &button {
+                color: $font-black;
+            }
         }
 
     }
