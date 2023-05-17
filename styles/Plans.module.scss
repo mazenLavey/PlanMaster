@@ -22,7 +22,7 @@
 
     .plansContainer {
         @include flex-row(false);
-        gap: $gap-s;
+        gap: $gap-l;
         padding-bottom: 1rem;
         overflow-x: auto;
         scrollbar-width: thin;

@@ -30,11 +30,11 @@ const Plans: React.FC = ()=>{
                 <AddNewPlan />
             </div>
             {
-                isMobileScreen?
+                false?
                 <div style={{overflow: "hidden", paddingBottom: "2.5rem"}} className={styles.mobileScreen}>
                     <Swiper
                         spaceBetween={10}
-                        slidesPerView={1.5}
+                        slidesPerView={1.6}
                         pagination={{
                             type: "fraction",
                         }}
