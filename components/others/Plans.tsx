@@ -26,7 +26,7 @@ const Plans: React.FC = ()=>{
     return (
         <section className={styles.wrapper}>
             <div className={styles.header}>
-                <h2 className={styles.title}>{allPlans.length === 1? "plan" : "plans"} ({allPlans.length})</h2>
+                <h2 className={styles.title}>{allPlans.length} {allPlans.length === 1? "plan" : "plans"}</h2>
                 <AddNewPlan />
             </div>
             {

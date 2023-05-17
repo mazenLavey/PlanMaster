@@ -29,6 +29,15 @@ const TaskForm: React.FC<Props> = ({currentPlanId, taskData, action, closePopup}
     });
 
     useEffect(()=>{
+        // adding subtasks data to plan array
+        function collectAllData() {
+            setFormData(prevValue => {
+                return {
+                    ...prevValue,
+                    subTasks: subTasksArray
+                };
+            });
+        };
         collectAllData();
     }, [subTasksArray])
 
@@ -73,16 +82,6 @@ const TaskForm: React.FC<Props> = ({currentPlanId, taskData, action, closePopup}
                     return subTask
                 };
             });
-        });
-    };
-
-    // adding subtasks data to plan array
-    function collectAllData() {
-        setFormData(prevValue => {
-            return {
-                ...prevValue,
-                subTasks: subTasksArray
-            };
         });
     };
 
