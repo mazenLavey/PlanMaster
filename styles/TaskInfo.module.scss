@@ -33,15 +33,25 @@
 
         input {
             appearance: none;
+            position: relative;
             width: 1rem;
             height: 1rem;
             border: 1px solid $white;
             border-radius: 3px;
             cursor: pointer;
-            
+
             &:checked {
                 background-color: $white;
-                box-shadow: -1px 1px 3px $shadow-dark;
+            }
+
+            &:checked::after {
+                content: "\2714";
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                color: $green;
+                font-size: var(--font-600);
             }
 
             &:checked + label {

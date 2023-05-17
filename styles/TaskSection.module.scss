@@ -36,7 +36,7 @@
     .tasks {
         @include flex-column(false);
         padding: $padding-s;
-        outline: 1px dashed $gray-2;
+        border: 1px dashed $gray-2;
         border-radius: $radius-l;
         gap: $gap-s;
         min-height: 200px;

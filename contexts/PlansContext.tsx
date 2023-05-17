@@ -63,7 +63,7 @@ const PlansProvider: React.FC<Props> = ({children}) => {
             description: "descript your plan",
             deadline: "",
             tasks: [],
-            colors: getRandomColors()
+            barColors: getRandomColors()
         };
         setAllPlans(prevPlans => [...prevPlans, newPlan]);
         setCurrentPlan(newPlan);

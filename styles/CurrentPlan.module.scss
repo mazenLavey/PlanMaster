@@ -28,7 +28,7 @@
     .limitation {
         @include flex-row(false);
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
         gap: $gap-s;
         font-size: var(--font-200);
         color: $font-dark-gray;
@@ -57,8 +57,35 @@
         border-radius: $radius-m;
         font-size: var(--font-200);
         color: $font-white;
-        background-color: $orange-0;
+        background-color: $black-1;
         text-transform: capitalize;
+        position: relative;
+
+        &.btn {
+            background-color: $orange-0;
+            &:hover {
+                background-color: $orange-1;
+            }
+        }
+
+        &.deadline {
+            padding-bottom: $padding-s;
+            background-color: transparent;
+            color: $font-black;
+            &::after {
+                content: "";
+                position: absolute;
+                right: 0px;
+                bottom: -16px;
+                height: 20px;
+                width: 100%;
+                border: 1px dashed;
+                border-radius: 3px;
+                border-color: $gray-1 $gray-1 transparent transparent;
+            }
+        }
+
+
     }
 
     .list {

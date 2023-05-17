@@ -38,12 +38,12 @@ const CurrentPlan: React.FC<Props> = ({currentPlanData}) => {
                     <span className={styles.badge}>
                         days: {days}
                     </span>
-                    <span className={styles.badge}>
+                    <span className={`${styles.badge} ${styles.deadline}`}>
                         dealline: {currentPlanData.deadline}
                     </span>
                 </>
                 :
-                <button onClick={()=> handleToggle()} className={styles.badge}>
+                <button onClick={()=> handleToggle()} className={`${styles.badge} ${styles.btn}`}>
                     <FontAwesomeIcon icon={faPlus} />
                     deadline
                 </button>

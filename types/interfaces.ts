@@ -11,7 +11,7 @@ export interface PlanType {
     description: string,
     deadline: string,
     tasks: TaskType[],
-    colors: string[],
+    barColors: string[],
 }
 
 export interface TaskType {

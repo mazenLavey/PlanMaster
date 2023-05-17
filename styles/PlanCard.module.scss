@@ -41,7 +41,7 @@
         }
     
         .btnContainer {
-            @include flex-row(false);
+            @include flex-row(true);
             gap: $gap-l;
         }
 

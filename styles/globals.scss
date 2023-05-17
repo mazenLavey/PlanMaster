@@ -26,7 +26,6 @@
 @font-face {
   font-family: 'Poppins';
   src: url(../public/fonts/Poppins-Bold.woff) format('woff');
-  src: url();
   font-weight: 700;
   font-style: normal;
 }
@@ -65,12 +64,11 @@ html {
 }
 
 body {
-  font-family: "Poppin";
+  font-family: "Poppins";
   color: $font-black;
   background-color: $bg-lightBlue;
   font-size: var(--font-400);
-  // letter-spacing: 0.05em;
-  // line-height: 1.5;
+  letter-spacing: 0.5px;
 }
 
 img {

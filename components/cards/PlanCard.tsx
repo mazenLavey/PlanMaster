@@ -8,7 +8,6 @@ import { faPen, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import dateFormat from "@/functions/dateFormat";
 import ProgressBar from "@/components/others/ProgressBar";
-import getRandomColors from "@/functions/getRandomColors";
 
 interface Props {
     data: PlanType,
@@ -44,7 +43,7 @@ const PlanCard: React.FC<Props> = ({data, showPlan, deletePlan}) => {
             </div>
             <div className={styles.progress}>
                 <p>{doneTasks} of {tasksSum} Tasks { barWidth === 100 && <FontAwesomeIcon icon={faCircleCheck} size="sm" style={{color: "#34C759"}}/>}</p>
-                <ProgressBar barWidth={barWidth} startColor={data.colors[0]} endColor={data.colors[1]}/>
+                <ProgressBar barWidth={barWidth} startColor={data.barColors[0]} endColor={data.barColors[1]}/>
                 <span className={styles.date}>{creationDate}</span>
             </div>
         </div>
