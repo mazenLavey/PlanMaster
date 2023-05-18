@@ -20,7 +20,9 @@ const Plans: React.FC = ()=>{
     return (
         <section className={styles.wrapper}>
             <div className={styles.header}>
-                <h2 className={styles.title}>{allPlans.length} {allPlans.length === 1? "plan" : "plans"}</h2>
+                <h2 className={`${styles.title} ${allPlans.length > 0? "" : styles.hide}`} >
+                    {allPlans.length} {allPlans.length > 1? "plans" : "plan"}
+                </h2>
                 <AddNewPlan />
             </div>
             <div className={styles.plansContainer} onWheel={handleScroll} ref={planBoxRef}>

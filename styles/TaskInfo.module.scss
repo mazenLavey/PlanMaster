@@ -26,7 +26,8 @@
     }
 
     .subtask {
-        @include flex-row(false);
+        display: grid;
+        grid-template-columns: auto 1fr;
         align-items: center;
         gap: $gap-s;
         padding-left: $padding-m;

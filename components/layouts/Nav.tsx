@@ -8,7 +8,7 @@ const Nav: React.FC = ()=>{
             <div className={` ${styles.wrapper} container`}>
                 <Logo />
                 <nav>
-                    <div>login</div>
+                    <div></div>
                 </nav>
             </div>
         </header>

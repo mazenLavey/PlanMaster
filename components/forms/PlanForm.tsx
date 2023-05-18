@@ -42,7 +42,7 @@ const PlanForm: React.FC<Props> = ({data, closePopup})=>{
                 <input type="text" name="title" id="title" onChange={handleChange} value={formData.title} required/>
 
                 <label htmlFor="description">descripe your plan</label>
-                <input type="text" name="description" id="description" onChange={handleChange} value={formData.description} required/>
+                <input type="text" name="description" id="description" onChange={handleChange} value={formData.description}/>
 
                 <label htmlFor="deadline">deadline</label>
                 <input type="date" name="deadline" id="deadline" onChange={handleChange} value={formData.deadline} min={todayDate} />

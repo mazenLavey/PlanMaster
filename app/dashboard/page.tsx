@@ -1,8 +1,8 @@
-import styles from '@/styles/Dashboard.module.scss'
+import styles from '@/styles/PlanMasterDashboard.module.scss'
 import Sidebar from "@/components/others/Sidebar";
 import PlanConstructor from "./PlanConstructor";
 
-const Dashboard: React.FC = ()=>{
+const PlanMasterDashboard: React.FC = ()=>{
     return (
         <main className={styles.wrapper}>
             <Sidebar />
@@ -11,4 +11,4 @@ const Dashboard: React.FC = ()=>{
     );
 };
 
-export default Dashboard;
+export default PlanMasterDashboard;

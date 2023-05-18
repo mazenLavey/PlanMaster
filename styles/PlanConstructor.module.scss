@@ -1,9 +1,23 @@
 
 @use "variables" as *;
+@use "mixins" as *;
 
-.emptyBox {
-    border-radius: $radius-l;
-    background-color: $white;
-    padding: $padding-l;
-    flex-grow: 1;
+.empty {
+    @include flex-column(false);
+    align-items: center;
+    gap: $gap-l;
+
+    .box {
+        border-radius: $radius-l;
+        background-color: $white;
+        padding: $padding-l;
+        width: 100%;
+    }
+
+    img {
+        position: unset !important;
+        mix-blend-mode: darken;
+        opacity: 0.5;
+        width: clamp(300px, 100%, 450px) !important;
+    }
 }

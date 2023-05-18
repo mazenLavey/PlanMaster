@@ -169,20 +169,27 @@ h4 {
 
 /* end global */
 
-// start swiper
-.swiper {
-  overflow: unset !important;
+// start scrollbar
+html {
+  scrollbar-width: thin;
+  scrollbar-color: $orange-0 $gray-3;
 }
 
-.swiper-pagination-fraction {
-  bottom: -38px !important;
-  top: unset !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 80px !important;
-  padding: 0.4rem !important;
-  background-color: $white !important;
-  border-radius: $radius-m !important;
-  font-size: var(--font-200) !important;
+::-webkit-scrollbar {
+  width: 8px;
 }
-// end swiper
+
+::-webkit-scrollbar-thumb {
+  background: $orange-0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $gray-3;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: $orange-2;
+}
+// end scrollbar

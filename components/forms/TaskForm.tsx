@@ -109,7 +109,7 @@ const TaskForm: React.FC<Props> = ({currentPlanId, taskData, action, closePopup}
                 <input type="text" name="title" id="title" value={formData.title} onChange={handleChange} required/>
 
                 <label htmlFor="taskDescription">shortly description the task</label>
-                <textarea name="taskDescription" id="taskDescription" value={formData.taskDescription} onChange={handleChange} required/>
+                <textarea name="taskDescription" id="taskDescription" value={formData.taskDescription} onChange={handleChange}/>
                 <fieldset>
                     <legend>SubTasks</legend>
                     <div className={styles.subTasksContainer}>

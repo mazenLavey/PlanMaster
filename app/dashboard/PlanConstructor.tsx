@@ -2,8 +2,9 @@
 
 import { useContext } from "react";
 import { PlansContext } from "@/contexts/PlansContext";
-import CurrentPlan from "@/app/dashboard/CurrentPlan";
+import CurrentPlan from "./CurrentPlan";
 import styles from "@/styles/PlanConstructor.module.scss";
+import Image from "next/image";
 
 const PlanConstructor: React.FC = ()=>{
     const {currentPlan} = useContext(PlansContext);
@@ -13,8 +14,11 @@ const PlanConstructor: React.FC = ()=>{
             currentPlan? 
             <CurrentPlan currentPlanData={currentPlan} />
             :
-            <div className={styles.emptyBox}>
-                No Plans
+            <div className={styles.empty}>
+                <div className={styles.box}>
+                    No Plans
+                </div>
+                <Image src="/assets/no_plans.jpg" alt="task management" fill={true}/>
             </div>
         }
         </>

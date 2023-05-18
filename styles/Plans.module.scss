@@ -5,17 +5,22 @@
 
 .wrapper {
     @include flex-column(false);
+    
     .header {
         @include flex-row(false);
         justify-content: space-between;
         align-items: center;
         gap: $gap-s;
-        padding: $padding-s $padding-l;
+        padding: $padding-s 0;
         width: 100%;
 
         .title {
             font-size: var(--font-600);
             text-transform: capitalize;
+
+            &.hide {
+                visibility: hidden;
+            }
         }
 
     }

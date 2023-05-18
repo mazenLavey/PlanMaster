@@ -4,6 +4,7 @@ import { createContext, useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { PlanType, TaskType} from "@/types/interfaces";
 import getRandomColors from "@/functions/getRandomColors";
+import { stringify } from "querystring";
 
 type Props = {
     children: React.ReactNode
@@ -39,6 +40,19 @@ const PlansProvider: React.FC<Props> = ({children}) => {
     const [currentPlan, setCurrentPlan] = useState<PlanType | undefined>(undefined);
 
     useEffect(()=>{
+        const plans: string | null = window.localStorage.getItem("planMaster");
+        if (plans) {
+            setAllPlans(JSON.parse(plans));
+        }
+    }, []);
+
+    useEffect(()=>{
+        function addTolocalStorage() {
+            const plans: string = JSON.stringify(allPlans);
+            window.localStorage.setItem("planMaster", plans);
+        };
+        
+
         if(allPlans.length > 0) {
             setCurrentPlan(oldPlan => {
                 const updataCurrent: PlanType | undefined = allPlans.find(plan => plan.id === oldPlan?.id);
@@ -48,6 +62,7 @@ const PlansProvider: React.FC<Props> = ({children}) => {
                     return allPlans[allPlans.length -1];
                 } 
             });
+            addTolocalStorage();
         } else {
             setCurrentPlan(undefined);
         }

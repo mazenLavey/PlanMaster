@@ -6,6 +6,7 @@
     @include flex-row(true);
     gap: $gap-xs;
     min-width: 70px;
+    max-width: fit-content;
     padding: $padding-s $padding-m;
     border-radius: $radius-l;
     color: $font-white;

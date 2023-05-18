@@ -27,9 +27,9 @@
             text-transform: capitalize;
             font-size: var(--font-400);
             text-overflow: ellipsis;
-            width: 100px;
             white-space: nowrap;
             overflow: hidden;
+            max-width: 120px;
         }
     
         button {

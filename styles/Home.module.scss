@@ -1,17 +1,50 @@
 
-@import 'mixins';
-@import "variables";
+@use 'mixins' as *;
+@use "variables" as *;
 
 
-.header {
-    @include flex-column(true);
-    text-align: center;
-    
-    .text {
-        color: rgba(255, 187, 0, 0.87);
+.hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: start;
+    justify-content: center;
+    height: calc(100vh - 150px);
+    gap: 1rem;
+
+    @media (min-width: 992px) {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
     }
 
-    .paragraph {
-        max-width: 500px;
+    .text {
+        @include flex-column(false);
+        align-self: center;
+        gap: $gap-l;
+
+        > h1 {
+            text-transform: capitalize;
+            .brand {
+                color: $orange-0;
+            }
+        }
+    
+        .paragraph {
+            max-width: 500px;
+            text-align: justify;
+        }
+
+        > a {
+            font-size: var(--font-600);
+        }
+    }
+
+    .imgContainer {
+        @include flex-row(true);
+        width: 100%;
+
+        img {
+            position: unset !important;
+            width: clamp(300px, 100%, 500px) !important;
+        }
     }
 }

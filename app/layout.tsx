@@ -1,6 +1,7 @@
 import '@/styles/globals.scss';
 import { PlansProvider } from '@/contexts/PlansContext';
 import Nav from '@/components/layouts/Nav';
+import Footer from '@/components/layouts/Footer';
 
 export const metadata = {
   title: 'Track plan',
@@ -16,9 +17,12 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <PlansProvider>
-          <Nav />
-          <div className='container'>
-            {children}
+          <div style={{display: "flex", flexDirection: "column", height: "100vh"}}>
+            <Nav />
+            <div className='container'>
+              {children}
+            </div>
+            <Footer/>
           </div>
         </PlansProvider>
         <div id='popupPortal'></div>

@@ -1,0 +1,15 @@
+
+@use "mixins" as *;
+@use "variables" as *;
+
+.wrapper {
+    width: 100%;
+    font-size: var(--font-300);
+    padding-top: $padding-l;
+    padding-bottom: $padding-l;
+    margin-top: auto;
+
+    > p > span {
+        color: $orange-0;
+    }
+}

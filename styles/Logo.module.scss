@@ -1,0 +1,16 @@
+
+@use "mixins" as *;
+@use "variables" as *;
+
+.wrapper {
+    height: 100%;
+    cursor: pointer;
+
+    &:hover {
+        scale: 1.05;
+    }
+    img {
+        position: unset !important;
+    }
+
+}
