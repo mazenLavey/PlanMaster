@@ -2,6 +2,7 @@ import styles from './../styles/Home.module.scss';
 import Link from 'next/link';
 import stylesBtn from "@/styles/Buttons.module.scss";
 import Image from 'next/image';
+import { nanoid } from 'nanoid';
 
 const Home:React.FC = () => {
   return (
@@ -11,7 +12,7 @@ const Home:React.FC = () => {
         <Link href={"/dashboard"} className={stylesBtn.button}>Start Free Now</Link>
       </header>
       <div className={styles.imgContainer}>
-        <Image src="/assets/planmaster_hero_img.png" alt="task management" fill={true}/>
+        <Image src="/assets/planmaster_hero_img.png" alt="task management" fill={true} />
       </div>
     </main>
   )

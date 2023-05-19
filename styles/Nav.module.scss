@@ -3,7 +3,7 @@
 @use "variables" as *;
 
 .navbar {
-    padding: $padding-m;
+    padding: $padding-m 0;
     height: 60px;
 
     .wrapper {

@@ -13,7 +13,8 @@ const Logo: React.FC = ()=>{
 
     return (
         <div className={styles.wrapper} onClick={handleClick}>
-            <Image src="/assets/logo.png" alt='logo' fill={true}  />
+            <img src='/assets/logo04.png' alt='logo' width={40} height={40}/>
+            {/* <p>Plan Master</p> */}
         </div>
     );
 };

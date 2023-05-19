@@ -1,18 +1,30 @@
 "use client";
 
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { PlansContext } from "@/contexts/PlansContext";
 import PlanCard from "@/components/cards/PlanCard";
 import styles from "@/styles/Plans.module.scss";
 import AddNewPlan from "../buttons/AddNewPlan";
 
-const Plans: React.FC = ()=>{
-    const {allPlans, showPlan, deletePlan} = useContext(PlansContext);
+const Plans: React.FC = () => {
+    const { allPlans, showPlan, deletePlan } = useContext(PlansContext);
     const planBoxRef = useRef<HTMLDivElement>(null);
 
-    function handleScroll(e: React.WheelEvent<HTMLDivElement>): void {
+    useEffect(() => {
         const container = planBoxRef.current;
-        if(container) {
+        if (container) {
+            container.addEventListener("wheel", handleScroll, { passive: false });
+
+            return () => {
+                container.removeEventListener("wheel", handleScroll);
+            };
+        }
+    }, [])
+
+    function handleScroll(e: any): void {
+        e.preventDefault();
+        const container = planBoxRef.current;
+        if (container) {
             container.scrollLeft += e.deltaY;
         }
     }
@@ -20,13 +32,13 @@ const Plans: React.FC = ()=>{
     return (
         <section className={styles.wrapper}>
             <div className={styles.header}>
-                <h2 className={`${styles.title} ${allPlans.length > 0? "" : styles.hide}`} >
-                    {allPlans.length} {allPlans.length > 1? "plans" : "plan"}
+                <h2 className={`${styles.title} ${allPlans.length > 0 ? "" : styles.hide}`} >
+                    {allPlans.length} {allPlans.length > 1 ? "plans" : "plan"}
                 </h2>
                 <AddNewPlan />
             </div>
-            <div className={styles.plansContainer} onWheel={handleScroll} ref={planBoxRef}>
-            {allPlans && allPlans.map(el => <PlanCard key={el.id} showPlan={()=> showPlan(el)} data={el} deletePlan={() => deletePlan(el.id)}/>)}
+            <div className={styles.plansContainer} ref={planBoxRef}>
+                {allPlans && allPlans.map(el => <PlanCard key={el.id} showPlan={() => showPlan(el)} data={el} deletePlan={() => deletePlan(el.id)} />)}
             </div>
         </section>
     );
