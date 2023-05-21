@@ -18,16 +18,15 @@ const AddNewTask: React.FC<Props>= ({currentPlanId})=>{
     }
     return (
         <>
-        <button onClick={handleClick} className={styles.button}>
-            <FontAwesomeIcon icon={faPlus} width={15}/>
-            task
-        </button>
-        {showPopup && 
-            <Popup closePopup={() => handleToggle(false)}>
-                <TaskForm currentPlanId={currentPlanId} closePopup={() => handleToggle(false)} action="new"/>
-            </Popup>
-        }
-        
+            <button onClick={handleClick} className={styles.button}>
+                <FontAwesomeIcon icon={faPlus} width={15}/>
+                task
+            </button>
+            {showPopup && 
+                <Popup closePopup={() => handleToggle(false)}>
+                    <TaskForm currentPlanId={currentPlanId} closePopup={() => handleToggle(false)} action="new"/>
+                </Popup>
+            }
         </>
     );
 };

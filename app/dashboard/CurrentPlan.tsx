@@ -21,16 +21,19 @@ const CurrentPlan: React.FC<Props> = ({currentPlanData}) => {
     const creationDate = dateFormat(currentPlanData.timeStamp);
     const days = daysFromDates(creationDate, currentPlanData.deadline);
     const barWidth = getBarWidthFromDate(creationDate, currentPlanData.deadline);
-;
+
+    const titleText = currentPlanData? currentPlanData.title: "title";
+    const descriptionText = currentPlanData? currentPlanData.description: "description";
+
     return (
         <>
         <div className={styles.wrapper}>
             <header className={styles.header}>
-                <h2 data-time={"hello"} className={styles.title}>{currentPlanData? currentPlanData.title: "title"}</h2>
+                <h2 className={styles.title}>{titleText}</h2>
                 <AddNewTask currentPlanId={currentPlanData?.id}/>
             </header>
             <div className={styles.info}>
-                <p className={styles.description}>{currentPlanData? currentPlanData.description: "description"}</p>
+                <p className={styles.description}>{descriptionText}</p>
             </div>
             <div className={styles.limitation}>
                 {currentPlanData?.deadline ?

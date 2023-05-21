@@ -18,7 +18,9 @@ const PlanConstructor: React.FC = ()=>{
                 <div className={styles.box}>
                     No Plans
                 </div>
-                <Image src="/assets/no_plans.jpg" alt="task management" fill={true}/>
+                <div className={styles.imgContainer}>
+                    <Image src="/assets/no_plans.webp" alt="task management" fill={true} placeholder="empty" priority={true}/>
+                </div>
             </div>
         }
         </>

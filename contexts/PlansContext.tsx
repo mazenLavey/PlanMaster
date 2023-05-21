@@ -64,6 +64,7 @@ const PlansProvider: React.FC<Props> = ({children}) => {
             });
             addTolocalStorage();
         } else {
+            addTolocalStorage();
             setCurrentPlan(undefined);
         }
     }, [allPlans]);

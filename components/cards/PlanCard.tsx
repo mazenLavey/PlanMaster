@@ -33,12 +33,8 @@ const PlanCard: React.FC<Props> = ({data, showPlan, deletePlan}) => {
             <div className={styles.info}>
                 <h3>{data.title}</h3>
                 <div className={styles.btnContainer}>
-                    <button onClick={()=> handleToggle()}>
-                        <FontAwesomeIcon icon={faPen} />
-                    </button>
-                    <button onClick={handleDelete}>
-                        <FontAwesomeIcon icon={faTrashCan} />
-                    </button>
+                    <button onClick={()=> handleToggle()}><FontAwesomeIcon icon={faPen} /></button>
+                    <button onClick={handleDelete}><FontAwesomeIcon icon={faTrashCan} /></button>
                 </div>
             </div>
             <div className={styles.progress}>
