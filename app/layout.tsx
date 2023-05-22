@@ -1,9 +1,10 @@
 import '@/styles/globals.scss';
 import { PlansProvider } from '@/contexts/PlansContext';
+import { Metadata } from 'next';
 import Nav from '@/components/layouts/Nav';
 import Footer from '@/components/layouts/Footer';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Plan Master',
   description: 'Stay organized and achieve more goals using a planning app for your tasks',
   openGraph: {
@@ -19,6 +20,12 @@ export const metadata = {
     locale: 'en-US',
     type: 'website',
   },
+  twitter: {
+    title: "Plan Master",
+    description: "Stay organized and achieve more goals using a planning app for your tasks",
+    site: "https://planmaster.netlify.app",
+    images: "https://planmaster.netlify.app/og_img.png",
+  },
 }
 
 export default function RootLayout({
@@ -30,12 +37,12 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <PlansProvider>
-          <div style={{display: "flex", flexDirection: "column", height: "100vh"}}>
+          <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
             <Nav />
             <div className='container'>
               {children}
             </div>
-            <Footer/>
+            <Footer />
           </div>
         </PlansProvider>
         <div id='popupPortal'></div>
