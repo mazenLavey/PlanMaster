@@ -13,9 +13,7 @@ export const metadata = {
     siteName: 'Plan Master',
     images: [
       {
-        url: 'https://planmaster.netlify.app/og-img.png',
-        width: 1038,
-        height: 623,
+        url: 'https://planmaster.netlify.app/og_img.png',
       }
     ],
     locale: 'en-US',
