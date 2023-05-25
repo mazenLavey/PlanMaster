@@ -70,13 +70,13 @@ const PlansProvider: React.FC<Props> = ({children}) => {
     }, [allPlans]);
 
     function addNewPlan(): void {
-        const defaultPlanNum: string = (allPlans.length + 1).toString(); 
+
         const newPlan: PlanType = {
             id: nanoid(),
             timeStamp: new Date().getTime(),
             status: false,
-            title: `new plan ${defaultPlanNum}`,
-            description: "descript your plan",
+            title: "",
+            description: "",
             deadline: "",
             tasks: [],
             barColors: getRandomColors()
@@ -148,8 +148,10 @@ const PlansProvider: React.FC<Props> = ({children}) => {
             return prevValue.map(plan => {
                 if(plan.id === planId) {
                     const updataTasks: TaskType[] = plan.tasks.map(task => task.id === updatedTask.id? updatedTask : task);
+                    const checkPlanStatus: boolean = updataTasks.every(task => task.stage === "done");
                     return {
                         ...plan,
+                        status: checkPlanStatus,
                         tasks: updataTasks
                     };
                 } else {

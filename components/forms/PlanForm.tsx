@@ -39,10 +39,10 @@ const PlanForm: React.FC<Props> = ({data, closePopup})=>{
         <form onSubmit={handleSubmit} className={styles.wrapper}>
             <div className={styles.form}>
                 <label htmlFor="title">title</label>
-                <input type="text" name="title" id="title" onChange={handleChange} value={formData.title} required/>
+                <input type="text" name="title" id="title" onChange={handleChange} value={formData.title} required placeholder="e.g. Learn Photoshop"/>
 
                 <label htmlFor="description">descripe your plan</label>
-                <input type="text" name="description" id="description" onChange={handleChange} value={formData.description}/>
+                <input type="text" name="description" id="description" onChange={handleChange} value={formData.description} placeholder="e.g. I have to Learn the basics of photoshop ..."/>
 
                 <label htmlFor="deadline">deadline</label>
                 <input type="date" name="deadline" id="deadline" onChange={handleChange} value={formData.deadline} min={todayDate} />

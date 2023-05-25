@@ -30,6 +30,10 @@
                 border-color: $orange-0;
                 color: $font-black;
             }
+
+            &::placeholder {
+                font-style: italic;
+            }
         }
     
         input[type="date"] {

@@ -31,14 +31,14 @@ const PlanCard: React.FC<Props> = ({data, showPlan, deletePlan}) => {
         <>
         <div className={styles.wrapper} onClick={() => showPlan(data)}>
             <div className={styles.info}>
-                <h3>{data.title}</h3>
+                <h3>{data.title? data.title : "new plan"}</h3>
                 <div className={styles.btnContainer}>
                     <button onClick={()=> handleToggle()}><FontAwesomeIcon icon={faPen} /></button>
                     <button onClick={handleDelete}><FontAwesomeIcon icon={faTrashCan} /></button>
                 </div>
             </div>
             <div className={styles.progress}>
-                <p>{doneTasks} of {tasksSum} Tasks { barWidth === 100 && <FontAwesomeIcon icon={faCircleCheck} size="sm" style={{color: "#34C759"}}/>}</p>
+                <p>{doneTasks} of {tasksSum} Tasks { data?.status && <FontAwesomeIcon icon={faCircleCheck} size="sm" style={{color: "#34C759"}}/>}</p>
                 <ProgressBar barWidth={barWidth} startColor={data.barColors[0]} endColor={data.barColors[1]}/>
                 <span className={styles.date}>{creationDate}</span>
             </div>
