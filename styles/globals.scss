@@ -186,3 +186,18 @@ html {
   background-color: $orange-2;
 }
 // end scrollbar
+
+// animation
+.fade-in {
+  animation: fade-in 0.5s 1 alternate forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

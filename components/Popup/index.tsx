@@ -13,7 +13,7 @@ const Popup: React.FC<Props> = ({closePopup, children})=>{
 
     if (portal) {
         return ReactDOM.createPortal(
-            <div className={styles.layer}>
+            <div className={`${styles.layer} fade-in`}>
                 <div className={styles.box}>
                     <span onClick={closePopup} className={styles.closeBtn}>
                         <FontAwesomeIcon icon={faCircleXmark} width={20}/>
