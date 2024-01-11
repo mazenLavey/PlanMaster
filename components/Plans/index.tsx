@@ -2,9 +2,9 @@
 
 import { useContext, useEffect, useRef } from "react";
 import { PlansContext } from "@/contexts/PlansContext";
-import PlanCard from "@/components/cards/PlanCard";
-import styles from "@/styles/Plans.module.scss";
-import AddNewPlan from "../buttons/AddNewPlan";
+import PlanCard from "@/components/PlanCard";
+import styles from "./Plans.module.scss";
+import AddNewPlan from "@/components/AddNewPlan";
 
 const Plans: React.FC = () => {
     const { allPlans, showPlan, deletePlan } = useContext(PlansContext);

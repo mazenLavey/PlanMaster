@@ -1,8 +1,8 @@
 import { PlanType } from "@/types/interfaces";
-import AddNewTask from "@/components/buttons/AddNewTask";
-import ProgressBar from "@/components/others/ProgressBar";
-import Popup from "@/components/others/Popup";
-import PlanForm from "@/components/forms/PlanForm";
+import AddNewTask from "@/components/AddNewTask";
+import ProgressBar from "@/components/ProgressBar";
+import Popup from "@/components/Popup";
+import PlanForm from "@/components/PlanForm";
 import TaskSection from "./TaskSection";
 import { useToggle } from "@/hooks/useToggle";
 import dateFormat from "@/functions/dateFormat";

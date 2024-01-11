@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
-import styles from "@/styles/Logo.module.scss";
+import styles from "./Logo.module.scss";
 
 const Logo: React.FC = ()=>{
     const router = useRouter();

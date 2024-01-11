@@ -1,8 +1,8 @@
 import '@/styles/globals.scss';
 import { PlansProvider } from '@/contexts/PlansContext';
 import { Metadata } from 'next';
-import Nav from '@/components/layouts/Nav';
-import Footer from '@/components/layouts/Footer';
+import Nav from '@/components/Nav';
+import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: 'Plan Master',

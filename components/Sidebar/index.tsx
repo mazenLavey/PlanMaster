@@ -1,5 +1,5 @@
-import Plans from "@/components/others/Plans";
-import styles from "@/styles/Sidebar.module.scss";
+import Plans from "@/components/Plans";
+import styles from "./Sidebar.module.scss";
 
 const Sidebar: React.FC = ()=>{
     return (

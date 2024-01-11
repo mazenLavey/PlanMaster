@@ -1,5 +1,5 @@
-import Logo from "../others/Logo";
-import styles from "@/styles/Nav.module.scss";
+import Logo from "../Logo";
+import styles from "./Nav.module.scss";
 import '@/styles/globals.scss';
 
 const Nav: React.FC = ()=>{

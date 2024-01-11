@@ -1,13 +1,13 @@
-import Popup from "@/components/others/Popup";    
-import PlanForm from "@/components/forms/PlanForm";
+import Popup from "@/components/Popup";    
+import PlanForm from "@/components/PlanForm";
 import { PlanType } from "@/types/interfaces";
 import { useToggle } from "@/hooks/useToggle";
-import styles from "@/styles/PlanCard.module.scss";
+import styles from "./PlanCard.module.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import dateFormat from "@/functions/dateFormat";
-import ProgressBar from "@/components/others/ProgressBar";
+import ProgressBar from "@/components/ProgressBar";
 
 interface Props {
     data: PlanType,

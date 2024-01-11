@@ -1,5 +1,5 @@
-import Popup from "@/components/others/Popup";
-import TaskForm from "@/components/forms/TaskForm";
+import Popup from "@/components/Popup";
+import TaskForm from "@/components/TaskForm";
 import { useToggle } from "@/hooks/useToggle";
 import styles from "@/styles/Buttons.module.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

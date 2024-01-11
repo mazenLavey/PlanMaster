@@ -1,4 +1,4 @@
-import styles from '@/styles/Popup.module.scss';
+import styles from './Popup.module.scss';
 import ReactDOM  from 'react-dom'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
