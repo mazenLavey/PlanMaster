@@ -1,5 +1,5 @@
-@use "mixins" as *;
-@use "variables" as *;
+@use "@/styles/mixins" as *;
+@use "@/styles/variables" as *;
 
 .info {
     @include flex-column(false);

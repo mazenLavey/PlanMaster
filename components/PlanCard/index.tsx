@@ -29,7 +29,7 @@ const PlanCard: React.FC<Props> = ({data, showPlan, deletePlan}) => {
 
     return (
         <>
-        <div className={styles.wrapper} onClick={() => showPlan(data)}>
+        <div className={`${styles.wrapper} fade-in`} onClick={() => showPlan(data)}>
             <div className={styles.info}>
                 <h3>{data.title? data.title : "new plan"}</h3>
                 <div className={styles.btnContainer}>

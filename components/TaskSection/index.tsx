@@ -1,6 +1,5 @@
 import TaskCard from '@/components/TaskCard';
-import styles from '@/styles/TaskSection.module.scss';
-import { nanoid } from "nanoid";
+import styles from './TaskSection.module.scss';
 import { PlanType, TaskStage } from '@/types/interfaces';
 
 interface Props {
@@ -14,9 +13,9 @@ const TaskSection: React.FC<Props> = ({currentPlanData, section})=>{
     const sectionTypeText = section === "toDo" ? `To Do`: section === "inProcess"? `In Process` : `Done`;
     const sectionClassName = section === "toDo" ? "": section === "inProcess"? styles.inProcess : styles.done;
     
-    const renderTasks = currentPlanData?.tasks.map(el => {
+    const renderTasks = currentPlanData?.tasks.map((el, index) => {
         if(el.stage === section) {
-            return <TaskCard key={nanoid()} taskData={el} planId={currentPlanData.id}/>
+            return <TaskCard key={el.id} taskData={el} planId={currentPlanData.id}/>
         }});
 
     return (

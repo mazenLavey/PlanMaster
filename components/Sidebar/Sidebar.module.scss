@@ -1,11 +1,10 @@
-
-@use 'mixins' as *;
-@use 'variables' as *;
-
+@use "@/styles/mixins" as *;
+@use "@/styles/variables" as *;
 
 .wrapper {
     @include flex-column(false);
     justify-content: space-between;
     gap: $gap-l;
-    width: 100%;    
+    width: 100%;
+    margin-bottom: 5px;
 }

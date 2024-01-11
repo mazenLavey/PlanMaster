@@ -3,12 +3,12 @@ import AddNewTask from "@/components/AddNewTask";
 import ProgressBar from "@/components/ProgressBar";
 import Popup from "@/components/Popup";
 import PlanForm from "@/components/PlanForm";
-import TaskSection from "./TaskSection";
+import TaskSection from "../TaskSection";
 import { useToggle } from "@/hooks/useToggle";
 import dateFormat from "@/functions/dateFormat";
 import daysFromDates from "@/functions/daysFromDates";
 import { getBarWidthFromDate } from "@/functions/getBarWidthFromDate";
-import styles from "@/styles/CurrentPlan.module.scss";
+import styles from "./CurrentPlan.module.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
