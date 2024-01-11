@@ -4,9 +4,9 @@ import { PlansContext } from "@/contexts/PlansContext";
 import { useContext, useEffect, useState } from "react";
 import { TaskType, SubTask } from "@/types/interfaces";
 import { nanoid } from "nanoid";
-import styles from "@/styles/TaskForm.module.scss";
+import styles from "./TaskForm.module.scss";
 import stylesBtns from "@/styles/Buttons.module.scss";
-import SubTaskSlot from "@/components/forms/SubTaskSlot";
+import SubTaskSlot from "@/components/SubTaskSlot/SubTaskSlot";
 
 type action = "edit" | "new"
 

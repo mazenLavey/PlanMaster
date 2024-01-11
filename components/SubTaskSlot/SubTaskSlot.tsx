@@ -4,7 +4,7 @@ import { SubTask } from "@/types/interfaces";
 import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import styles from "@/styles/SubTaskSlot.module.scss";
+import styles from "./SubTaskSlot.module.scss";
 
 interface Props {
     slotId: string,

@@ -1,5 +1,5 @@
 import styles from '@/styles/PlanMasterDashboard.module.scss'
-import Sidebar from "@/components/others/Sidebar";
+import Sidebar from "@/components/Sidebar";
 import PlanConstructor from "./PlanConstructor";
 
 const PlanMasterDashboard: React.FC = ()=>{

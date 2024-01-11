@@ -4,7 +4,7 @@ import { PlansContext } from "@/contexts/PlansContext";
 import { SubTask } from "@/types/interfaces";
 import { TaskType } from "@/types/interfaces";
 import { useContext, useState } from "react";
-import styles from '@/styles/TaskInfo.module.scss';
+import styles from './TaskInfo.module.scss';
 
 interface Props {
     taskData: TaskType,

@@ -1,4 +1,4 @@
-import styles from "@/styles/ProgressBar.module.scss";
+import styles from "./ProgressBar.module.scss";
 
 type Props = {
     barWidth: string | number,

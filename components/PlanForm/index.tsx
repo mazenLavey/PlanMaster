@@ -1,7 +1,7 @@
 "use client";
 
 import { ChangeEvent, FormEvent, useContext, useState } from "react";
-import styles from "@/styles/PlanForm.module.scss";
+import styles from "./PlanForm.module.scss";
 import stylesBtns from "@/styles/Buttons.module.scss";
 import { PlansContext } from "@/contexts/PlansContext";
 import { PlanType } from "@/types/interfaces";

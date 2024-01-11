@@ -1,4 +1,4 @@
-import TaskCard from '@/components/cards/TaskCard';
+import TaskCard from '@/components/TaskCard';
 import styles from '@/styles/TaskSection.module.scss';
 import { nanoid } from "nanoid";
 import { PlanType, TaskStage } from '@/types/interfaces';
