@@ -7,7 +7,7 @@ import styles from "./Plans.module.scss";
 import AddNewPlan from "@/components/AddNewPlan";
 import TrashBtn from "@/components/TrashBtn";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartPie } from "@fortawesome/free-solid-svg-icons";
+import { faChartPie, faClipboardCheck } from "@fortawesome/free-solid-svg-icons";
 import Tooltip from "@/components/Tooltip";
 import Link from "next/link";
 import routes from "@/routes";
@@ -48,6 +48,11 @@ const Plans: React.FC = () => {
                     {activePlans.length} {activePlans.length > 1 ? "plans" : "plan"}
                 </h2>
                 <div className={styles.actions}>
+                    <Tooltip tooltipText="Finished plans">
+                        <Link href={routes.finishedPlans}>
+                            <FontAwesomeIcon icon={faClipboardCheck} size="1x"/>
+                        </Link>
+                    </Tooltip>
                     <Tooltip tooltipText="Statistics">
                         <Link href={routes.statistics}>
                             <FontAwesomeIcon icon={faChartPie} size="1x"/>

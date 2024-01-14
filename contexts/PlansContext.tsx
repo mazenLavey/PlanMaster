@@ -13,6 +13,7 @@ type Props = {
 interface PlansContextType {
     activePlans: PlanType[],
     deletedPlans: PlanType[],
+    archivedPlans: PlanType[],
     currentPlan: PlanType | undefined,
     isNewUser: boolean,
     addNewPlan: () => void,
@@ -20,6 +21,8 @@ interface PlansContextType {
     editPlanInfo: (formData: PlanType, planId: string) => void,
     deletePlan: (planId: string) => void,
     restorePlan: (planId: string) => void,
+    archivePlan: (planId: string) => void,
+    unarchivePlan: (planId: string) => void,
     addNewTask: (taskData: TaskType, planId: string) => void,
     deleteTask: (planId: string, taskId: string) => void,
     updataTask: (planId: string, updatedTask: TaskType) => void
@@ -29,12 +32,15 @@ const PlansContext = createContext<PlansContextType>({
     activePlans: [],
     currentPlan: undefined,
     deletedPlans: [],
+    archivedPlans: [],
     isNewUser: true,
     addNewPlan: () => {},
     showPlan: (planData) => {},
     editPlanInfo: (formData, planId) => {},
     deletePlan: (planId) => {},
     restorePlan: (planId) => {},
+    unarchivePlan: (planId) => {},
+    archivePlan: (planId) => {},
     addNewTask: (taskData, planId) => {},
     deleteTask: (planId, taskId)=> {},
     updataTask: (planId, updatedTask) => {}
@@ -45,6 +51,7 @@ const PlansProvider: React.FC<Props> = ({children}) => {
     const [activePlans, setActivePlans] = useState<PlanType[]>([]);
     const [currentPlan, setCurrentPlan] = useState<PlanType | undefined>(undefined);
     const [deletedPlans, setDeletedPlans] = useState<PlanType[]>([]);
+    const [archivedPlans, setArchivedPlans] = useState<PlanType[]>([]);
     const [isNewUser, setIsNewUser] = useState<boolean>(true);
 
     useEffect(()=>{
@@ -55,6 +62,7 @@ const PlansProvider: React.FC<Props> = ({children}) => {
     
             setActivePlans(plans.activePlans);
             setDeletedPlans(plans.deletedPlans);
+            setArchivedPlans(plans.archivedPlans);
             setIsNewUser(false);
         };
     }, []);
@@ -64,6 +72,7 @@ const PlansProvider: React.FC<Props> = ({children}) => {
             const plans: DataStorage = {
                 activePlans,
                 deletedPlans,
+                archivedPlans,
             };
             
             window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(plans));
@@ -85,7 +94,7 @@ const PlansProvider: React.FC<Props> = ({children}) => {
             addTolocalStorage();
             setCurrentPlan(undefined);
         }
-    }, [activePlans, deletedPlans]);
+    }, [activePlans, deletedPlans, archivedPlans]);
 
     function addNewPlan(): void {
 
@@ -176,6 +185,25 @@ const PlansProvider: React.FC<Props> = ({children}) => {
         setActivePlans(prev => [...prev, targetedPlan]);
     };
 
+    function unarchivePlan(planId: string): void {
+        const targetedPlan = archivedPlans.find(plan => plan.id === planId);
+
+        if(!targetedPlan) return;
+
+        setArchivedPlans(prev => prev.filter(el => el.id !== planId));
+        setActivePlans(prev => [...prev, targetedPlan]);
+    };
+
+    function archivePlan(planId: string): void {
+        const targetedPlan = activePlans.find(plan => plan.id === planId);
+
+        if(targetedPlan) {
+            setArchivedPlans(prev => [...prev, targetedPlan]);
+        };
+
+        setActivePlans(prevPlans => prevPlans.filter(plan => plan.id !== planId));
+    };
+
     function updataTask(planId: string, updatedTask: TaskType): void {
         setActivePlans(prev => {
             return prev.map(plan => {
@@ -198,6 +226,7 @@ const PlansProvider: React.FC<Props> = ({children}) => {
         <PlansContext.Provider value={{
             activePlans, 
             deletedPlans,
+            archivedPlans,
             currentPlan, 
             isNewUser, 
             addNewPlan, 
@@ -205,6 +234,8 @@ const PlansProvider: React.FC<Props> = ({children}) => {
             editPlanInfo, 
             deletePlan, 
             restorePlan, 
+            archivePlan,
+            unarchivePlan,
             addNewTask, 
             deleteTask, 
             updataTask, 

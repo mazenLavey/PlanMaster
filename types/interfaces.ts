@@ -31,4 +31,5 @@ export interface SubTask {
 export interface DataStorage  {
     activePlans: PlanType[],
     deletedPlans: PlanType[],
+    archivedPlans: PlanType[],
 }

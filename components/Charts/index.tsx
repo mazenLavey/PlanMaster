@@ -9,17 +9,19 @@ import SectionHeader from "@/components/SectionHeader";
 import "./index.scss";
 
 const Charts: React.FC = () => {
-    const {activePlans, deletedPlans} = useContext(PlansContext);
+    const {activePlans, deletedPlans, archivedPlans} = useContext(PlansContext);
+
+    const finishedPlans = activePlans.filter(plan => plan.status).length + archivedPlans.length;
 
     const data =  {
-        labels: ['Done', 'Active', 'Deleted'],
+        labels: ['Active', 'Finished', 'Deleted'],
         datasets: [{
             label: ' Total',
-            data: [0, deletedPlans.length, activePlans.length],
+            data: [activePlans.length, finishedPlans, deletedPlans.length],
             backgroundColor: [
+                '#ff9a7e',
                 '#3ed364',
-                '#f67f5d',
-                '#D1D1D6',
+                '#2e4a67',
             ],
             borderWidth: 0,
             }]

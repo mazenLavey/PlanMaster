@@ -30,10 +30,12 @@ const DashboardResolver: React.FC = () => {
             <Sidebar />
             {
                 currentPlan? (
-                    <CurrentPlan currentPlanData={currentPlan} />
+                    <>
+                        <CurrentPlan currentPlanData={currentPlan} />
+                    </>
                 ): (
                     <EmptyDashboard />
-            )}
+                )}
         </div>
     );
 };
