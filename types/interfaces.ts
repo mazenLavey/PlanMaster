@@ -28,7 +28,7 @@ export interface SubTask {
     status: boolean
 }
 
-// export interface TasksSectionProps {
-//     currentTaskData: TaskType[] | undefined,
-//     planId: string
-// }
+export interface DataStorage  {
+    activePlans: PlanType[],
+    deletedPlans: PlanType[],
+}

@@ -5,9 +5,10 @@ import { PlansContext } from "@/contexts/PlansContext";
 import PlanCard from "@/components/PlanCard";
 import styles from "./Plans.module.scss";
 import AddNewPlan from "@/components/AddNewPlan";
+import TrashBtn from "../TrashBtn";
 
 const Plans: React.FC = () => {
-    const { allPlans, showPlan, deletePlan } = useContext(PlansContext);
+    const { activePlans, deletedPlans } = useContext(PlansContext);
     const planBoxRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -19,7 +20,13 @@ const Plans: React.FC = () => {
                 container.removeEventListener("wheel", handleScroll);
             };
         }
-    }, [])
+    }, []);
+
+    const renderPlans = () => {
+        if(!activePlans) return;
+
+        return activePlans.map(el => <PlanCard key={el.id} data={el}/>)
+    }
 
     function handleScroll(e: any): void {
         e.preventDefault();
@@ -32,13 +39,16 @@ const Plans: React.FC = () => {
     return (
         <section className={styles.wrapper}>
             <div className={styles.header}>
-                <h2 className={`${styles.title} ${allPlans.length > 0 ? "" : styles.hide}`} >
-                    {allPlans.length} {allPlans.length > 1 ? "plans" : "plan"}
+                <h2 className={`${styles.title} ${activePlans.length > 0 ? "" : styles.hide}`} >
+                    {activePlans.length} {activePlans.length > 1 ? "plans" : "plan"}
                 </h2>
-                <AddNewPlan />
+                <div className={styles.actions}>
+                    <TrashBtn isActive={deletedPlans.length > 0} count={deletedPlans.length}/>
+                    <AddNewPlan />
+                </div>
             </div>
             <div className={styles.plansContainer} ref={planBoxRef}>
-                {allPlans && allPlans.map(el => <PlanCard key={el.id} showPlan={() => showPlan(el)} data={el} deletePlan={() => deletePlan(el.id)} />)}
+                {renderPlans()}
             </div>
         </section>
     );

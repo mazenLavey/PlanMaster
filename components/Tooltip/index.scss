@@ -1,0 +1,23 @@
+@use "@/styles/variables" as *;
+
+.Tooltip {
+    padding: 5px 10px;
+    border-radius: 8px;
+    background-color: $black-1;
+    color: $font-white;
+    font-size: 10px;
+
+    &::after {
+        position: absolute;
+        content: "";
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 5px solid;
+        border-color: $black-1 transparent transparent transparent;
+    }
+}
+
+.Tooltip__Wrapper {
+    width: fit-content;
+}

@@ -4,13 +4,14 @@ import { useContext, useState } from 'react';
 import { PlansContext } from '@/contexts/PlansContext';
 import { useToggle } from '@/hooks/useToggle';
 import { TaskType, OperationType, TaskStage } from '@/types/interfaces';
-import styles from './TaskCard.module.scss';
 import Popup from '../Popup';
 import TaskInfo from '../TaskInfo';
 import TaskForm from '../TaskForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faXmark, faPen, faCheck, faRotateLeft, faFlagCheckered } from '@fortawesome/free-solid-svg-icons';
 import { faCircleCheck, faCircleStop } from '@fortawesome/free-regular-svg-icons';
+import Tooltip from '../Tooltip';
+import './index.scss';
 
 interface Props {
     taskData: TaskType,
@@ -55,43 +56,47 @@ const TaskCard: React.FC<Props> = ({taskData, planId})=>{
 
     return (
         <>
-            <div className={styles.wrapper}>
-                <div className={styles.buttons}>
+            <div className="TaskCard">
+                <div className="TaskCard__BtnWrapper">
                     {task?.stage === "toDo"?
                         <>
-                            <button data-type='start' onClick={handleClick}>
+                            <button className="TaskCard__Btn" data-type='start' onClick={handleClick}>
                                 <FontAwesomeIcon icon={faFlagCheckered} />
                                 start
                             </button>
-                            <button onClick={()=> handleToggle()}>
+                            <button className="TaskCard__Btn" onClick={()=> handleToggle()}>
                                 <FontAwesomeIcon icon={faPen} />
                                 edit
                             </button>
-                            <button data-type='delete' onClick={handleClick} title='Delete task'>
-                                <FontAwesomeIcon icon={faXmark} />
-                            </button>
+                            <Tooltip className='TaskCard__BtnTooltip' tooltipText="Delete task">
+                                <button className="TaskCard__Btn" data-type='delete' onClick={handleClick} title='Delete task'>
+                                    <FontAwesomeIcon icon={faXmark} />
+                                </button>
+                            </Tooltip>
                         </>
                     :task?.stage === "inProcess"?
                         <>
-                            <button data-type='done' onClick={handleClick} className={`${checkAllDone? "": styles.btnDisabled}`}>
+                            <button className={`TaskCard__Btn ${checkAllDone? "": "TaskCard__Btn--Disabled"}`} data-type='done' onClick={handleClick}>
                                 <FontAwesomeIcon icon={faCheck} />
                                 check
                             </button>
-                            <button onClick={()=> handleToggle()}>
+                            <button className="TaskCard__Btn" onClick={()=> handleToggle()}>
                                 <FontAwesomeIcon icon={faPen} />
                                 edit
                             </button>
-                            <button data-type='stop' onClick={handleClick} title='Stop task'>
-                                <FontAwesomeIcon icon={faCircleStop} />
-                            </button>
+                            <Tooltip className='TaskCard__BtnTooltip' tooltipText="Stop task">
+                                <button className="TaskCard__Btn" data-type='stop' onClick={handleClick}>
+                                    <FontAwesomeIcon icon={faCircleStop} />
+                                </button>
+                            </Tooltip>
                         </>
                     :
                         <>
-                            <div className={styles.done}>
+                            <button className="TaskCard__Btn TaskCard__Btn--Done">
                                 <FontAwesomeIcon icon={faCircleCheck} />
                                 done
-                            </div>
-                            <button data-type='undo' onClick={handleClick}>
+                            </button>
+                            <button className="TaskCard__Btn" data-type='undo' onClick={handleClick}>
                                 <FontAwesomeIcon icon={faRotateLeft} />
                                 undo
                             </button>

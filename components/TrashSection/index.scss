@@ -1,0 +1,16 @@
+.TrashSection {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.TrashSection__Wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+.TrashSection__Title {
+    font-size: var(--font-400);
+    text-transform: capitalize;
+}

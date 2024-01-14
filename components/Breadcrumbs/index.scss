@@ -1,0 +1,38 @@
+.Breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-transform: capitalize;
+    width: fit-content;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.6;
+    }
+}
+
+.Breadcrumbs__Icon {
+    animation: side-move 0.3s infinite alternate none;
+    animation-play-state: paused;
+
+    .Breadcrumbs:hover & {
+        animation-play-state: running;
+    }
+}
+
+@keyframes side-move {
+    0% {
+        transform: translateX(2px);
+    }
+
+    100% {
+        transform: translateX(-2px);
+    }
+}
+
+.Breadcrumbs__Text {
+    font-size: 12px;
+    text-decoration: underline;
+    text-decoration-skip: 10px;
+    opacity: 0.8;
+}
