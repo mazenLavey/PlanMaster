@@ -1,6 +1,7 @@
 const routes = {
     dashboard: "/dashboard",
-    trash: "/dashboard/deleted-tasks",
+    trash: "/dashboard/deleted-plans",
+    statistics: "/dashboard/statistics",
 }
 
 export default routes;

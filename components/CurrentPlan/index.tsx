@@ -3,7 +3,7 @@ import AddNewTask from "@/components/AddNewTask";
 import ProgressBar from "@/components/ProgressBar";
 import Popup from "@/components/Popup";
 import PlanForm from "@/components/PlanForm";
-import TaskSection from "../TaskSection";
+import TaskSection from "@/components/TaskSection";
 import { useToggle } from "@/hooks/useToggle";
 import dateFormat from "@/functions/dateFormat";
 import daysFromDates from "@/functions/daysFromDates";
@@ -11,6 +11,7 @@ import { getBarWidthFromDate } from "@/functions/getBarWidthFromDate";
 import styles from "./CurrentPlan.module.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import Tooltip from "@/components/Tooltip";
 
 interface Props {
     currentPlanData: PlanType
@@ -45,10 +46,12 @@ const CurrentPlan: React.FC<Props> = ({currentPlanData}) => {
                     </span>
                 </>
                 :
-                <button onClick={()=> handleToggle()} className={`${styles.badge} ${styles.btn}`}>
-                    <FontAwesomeIcon icon={faPlus} />
-                    deadline
-                </button>
+                <Tooltip tooltipText="Add deadline">
+                    <button onClick={()=> handleToggle()} className={`${styles.badge} ${styles.btn}`}>
+                        <FontAwesomeIcon icon={faPlus} />
+                        deadline
+                    </button>
+                </Tooltip>
                 }
             </div>
             <ProgressBar barWidth={barWidth} startColor="#3ed364" endColor="#ff746d"/>

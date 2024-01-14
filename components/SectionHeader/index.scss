@@ -1,0 +1,11 @@
+@use "@/styles/mixins" as *;
+@use "@/styles/variables" as *;
+
+.SectionHeader {
+    padding: 10px;
+    border-radius: 12px;
+    width: fit-content;
+    background-color: $gray-5;
+    color: $font-black;
+    text-transform: capitalize;
+}

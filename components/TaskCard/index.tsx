@@ -4,13 +4,13 @@ import { useContext, useState } from 'react';
 import { PlansContext } from '@/contexts/PlansContext';
 import { useToggle } from '@/hooks/useToggle';
 import { TaskType, OperationType, TaskStage } from '@/types/interfaces';
-import Popup from '../Popup';
-import TaskInfo from '../TaskInfo';
-import TaskForm from '../TaskForm';
+import Popup from '@/components/Popup';
+import TaskInfo from '@/components/TaskInfo';
+import TaskForm from '@/components/TaskForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faXmark, faPen, faCheck, faRotateLeft, faFlagCheckered } from '@fortawesome/free-solid-svg-icons';
 import { faCircleCheck, faCircleStop } from '@fortawesome/free-regular-svg-icons';
-import Tooltip from '../Tooltip';
+import Tooltip from '@/components/Tooltip';
 import './index.scss';
 
 interface Props {

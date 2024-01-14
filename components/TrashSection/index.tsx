@@ -3,8 +3,9 @@
 import { PlansContext } from "@/contexts/PlansContext";
 import { useContext } from "react";
 import PlanCard from "@/components/PlanCard";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import SectionHeader from "@/components/SectionHeader";
 import './index.scss';
-import Breadcrumbs from "../Breadcrumbs";
 
 const TrashSection: React.FC = ()=>{
     const {deletedPlans} = useContext(PlansContext);
@@ -16,7 +17,7 @@ const TrashSection: React.FC = ()=>{
     return (
         <section className="TrashSection">
             <Breadcrumbs />
-            <h2 className="TrashSection__Title">Items: {deletedPlans?.length}</h2>
+            <SectionHeader title="trash" />
             <div className="TrashSection__Wrapper">
                 {renderDeletedPlans()}
             </div>
