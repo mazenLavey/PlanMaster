@@ -6,7 +6,7 @@ import { PlanType } from "@/types/interfaces";
 import { useToggle } from "@/hooks/useToggle";
 import styles from "./PlanCard.module.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen, faCircleCheck, faTrashCanArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faCircleCheck, faTrashCanArrowUp, faBoxArchive, faBoxOpen } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import dateFormat from "@/functions/dateFormat";
 import ProgressBar from "@/components/ProgressBar";
@@ -23,7 +23,7 @@ const PlanCard: React.FC<Props> = ({
     data,
     isDeleted = false
 }) => {
-    const { showPlan, deletePlan, restorePlan } = useContext(PlansContext);
+    const { showPlan, deletePlan, restorePlan, archivePlan, unarchivePlan } = useContext(PlansContext);
 
     const [showPopup, handleToggle] = useToggle();
     const creationDate = dateFormat(data.timeStamp);
@@ -46,29 +46,54 @@ const PlanCard: React.FC<Props> = ({
         restorePlan(data.id);
     }
 
+    function handleUnarchive(e: React.MouseEvent<HTMLButtonElement>): void {
+        e.stopPropagation();
+        unarchivePlan(data.id);
+    }
+
+    function handleArchive(e: React.MouseEvent<HTMLButtonElement>): void {
+        e.stopPropagation();
+        archivePlan(data.id);
+    }
+
     return (
         <>
         <div className={`${styles.wrapper} fade-in`} onClick={handleShow}>
             <div className={styles.info}>
                 <h3>{data.title? data.title : "new plan"}</h3>
                 {isDeleted?
-                    <Tooltip tooltipText="Restore plan">
-                        <button onClick={handleRestore}><FontAwesomeIcon icon={faTrashCanArrowUp} size="lg"/></button>
-                    </Tooltip>
+                    <>
+                        {
+                            data.status ?
+                            <Tooltip tooltipText="Unarchive plan">
+                                <button onClick={handleUnarchive}><FontAwesomeIcon icon={faBoxOpen} size="lg"/></button>
+                            </Tooltip>
+                            :
+                            <Tooltip tooltipText="Restore plan">
+                                <button onClick={handleRestore}><FontAwesomeIcon icon={faTrashCanArrowUp} size="lg"/></button>
+                            </Tooltip>
+                        }
+                    </>
                     :
                     <div className={styles.btnContainer}>
                         <Tooltip tooltipText="Edit plan">
                             <button onClick={()=> handleToggle()}><FontAwesomeIcon icon={faPen} /></button>
                         </Tooltip>
-
+                    {
+                        data.status ?
+                        <Tooltip tooltipText="Move to archive">
+                            <button onClick={handleArchive}><FontAwesomeIcon icon={faBoxArchive} color="#f67f5d"/></button>
+                        </Tooltip>
+                    :
                         <Tooltip tooltipText="Delete plan">
                             <button onClick={handleDelete}><FontAwesomeIcon icon={faTrashCan} /></button>
                         </Tooltip>
+                    }
                     </div>
                 }
             </div>
             <div className={styles.progress}>
-                <p>{doneTasks} of {tasksSum} Tasks { data?.status && <FontAwesomeIcon icon={faCircleCheck} size="sm" style={{color: "#34C759"}}/>}</p>
+                <p>{doneTasks} of {tasksSum} Tasks { data?.status && <FontAwesomeIcon icon={faCircleCheck} size="sm" color="#34C759"/>}</p>
                 <ProgressBar barWidth={barWidth} startColor={data.barColors[0]} endColor={data.barColors[1]}/>
                 <span className={styles.date}>{creationDate}</span>
             </div>

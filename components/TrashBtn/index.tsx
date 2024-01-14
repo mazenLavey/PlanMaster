@@ -16,7 +16,7 @@ const TrashBtn: React.FC<Props> = ({isActive = false, count}) => {
 
 
     return (
-        <Tooltip tooltipText='Go to deleted plans'>
+        <Tooltip tooltipText='Deleted plans'>
             <Link
                 className='TrashBtn'
                 href={routes.trash} 
