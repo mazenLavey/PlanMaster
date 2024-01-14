@@ -29,15 +29,11 @@ const DashboardResolver: React.FC = () => {
         <div className="fade-in">
             <Sidebar />
             {
-                currentPlan? 
-                (
-                    <>
-                        <CurrentPlan currentPlanData={currentPlan} />
-                    </>
+                currentPlan? (
+                    <CurrentPlan currentPlanData={currentPlan} />
                 ): (
                     <EmptyDashboard />
-                )
-            }
+            )}
         </div>
     );
 };

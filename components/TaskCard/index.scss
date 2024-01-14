@@ -1,0 +1,65 @@
+@use "@/styles/mixins" as *;
+@use "@/styles/variables" as *;
+
+.TaskCard {
+    @include flex-column(false);
+    padding: $padding-m;
+    border-radius: $radius-l;
+    background-image: linear-gradient(150deg, $orange-0 50%, $orange-2);
+    box-shadow: 0 3px 5px $shadow-dark;
+}
+
+.TaskCard__BtnWrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+    width: 100%;
+    height: 30px;
+    border-radius: $radius-l;
+    box-shadow: 0 2px 5px #ce6547;
+    overflow: hidden;
+}
+
+.TaskCard__Btn {
+    @include flex-row(true);
+    gap: $gap-s;
+    background-color: $white;
+    color: $font-black;
+    width: 100%;
+    height: 100%;
+    padding: $padding-s;
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: var(--font-200);
+    cursor: pointer;
+
+    &:active {
+        scale: 0.98;
+    }
+
+    &:hover {
+        background-color: $gray-3;
+        color: $white;
+    }
+
+    &:not(:last-child) {
+        border-right: 1px solid #b3b3b3;
+    }
+
+    
+    &--Disabled {
+        background-color: $black-2;
+        pointer-events: none;
+        cursor: default;
+    }
+
+    &--Done {
+        background-color: $green;
+        color: $white;
+        pointer-events: none;
+        cursor: default;
+    }
+}
+
+.TaskCard__BtnTooltip {
+    width: 100%;
+}

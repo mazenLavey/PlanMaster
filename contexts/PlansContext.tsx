@@ -2,33 +2,39 @@
 
 import { createContext, useEffect, useState } from "react";
 import { nanoid } from "nanoid";
-import { PlanType, TaskType} from "@/types/interfaces";
+import { DataStorage, PlanType, TaskType} from "@/types/interfaces";
 import getRandomColors from "@/functions/getRandomColors";
-import { stringify } from "querystring";
+import { LOCAL_STORAGE_KEY } from "@/constants";
 
 type Props = {
     children: React.ReactNode
 }
 
 interface PlansContextType {
-    allPlans: PlanType[],
+    activePlans: PlanType[],
+    deletedPlans: PlanType[],
     currentPlan: PlanType | undefined,
+    isNewUser: boolean,
     addNewPlan: () => void,
     showPlan: (planData: PlanType) => void,
     editPlanInfo: (formData: PlanType, planId: string) => void,
     deletePlan: (planId: string) => void,
+    restorePlan: (planId: string) => void,
     addNewTask: (taskData: TaskType, planId: string) => void,
     deleteTask: (planId: string, taskId: string) => void,
     updataTask: (planId: string, updatedTask: TaskType) => void
 }
 
 const PlansContext = createContext<PlansContextType>({
-    allPlans: [],
+    activePlans: [],
     currentPlan: undefined,
+    deletedPlans: [],
+    isNewUser: true,
     addNewPlan: () => {},
     showPlan: (planData) => {},
     editPlanInfo: (formData, planId) => {},
     deletePlan: (planId) => {},
+    restorePlan: (planId) => {},
     addNewTask: (taskData, planId) => {},
     deleteTask: (planId, taskId)=> {},
     updataTask: (planId, updatedTask) => {}
@@ -36,30 +42,42 @@ const PlansContext = createContext<PlansContextType>({
 
 
 const PlansProvider: React.FC<Props> = ({children}) => {
-    const [allPlans, setAllPlans] = useState<PlanType[]>([]);
+    const [activePlans, setActivePlans] = useState<PlanType[]>([]);
     const [currentPlan, setCurrentPlan] = useState<PlanType | undefined>(undefined);
+    const [deletedPlans, setDeletedPlans] = useState<PlanType[]>([]);
+    const [isNewUser, setIsNewUser] = useState<boolean>(true);
 
     useEffect(()=>{
-        const plans: string | null = window.localStorage.getItem("planMaster");
-        if (plans) {
-            setAllPlans(JSON.parse(plans));
-        }
+        const data: string | null = window.localStorage.getItem(LOCAL_STORAGE_KEY);
+            
+        if (data) {
+            const plans: DataStorage = JSON.parse(data);
+    
+            setActivePlans(plans.activePlans);
+            setDeletedPlans(plans.deletedPlans);
+            setIsNewUser(false);
+        };
     }, []);
 
     useEffect(()=>{
         function addTolocalStorage() {
-            const plans: string = JSON.stringify(allPlans);
-            window.localStorage.setItem("planMaster", plans);
+            const plans: DataStorage = {
+                activePlans,
+                deletedPlans,
+            };
+            
+            window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(plans));
         };
         
 
-        if(allPlans.length > 0) {
+        if(activePlans.length > 0) {
             setCurrentPlan(oldPlan => {
-                const updataCurrent: PlanType | undefined = allPlans.find(plan => plan.id === oldPlan?.id);
+                const updataCurrent: PlanType | undefined = activePlans.find(plan => plan.id === oldPlan?.id);
+    
                 if(updataCurrent) {
                     return updataCurrent;
                 } else if(updataCurrent === undefined) {
-                    return allPlans[allPlans.length -1];
+                    return activePlans[activePlans.length -1];
                 } 
             });
             addTolocalStorage();
@@ -67,7 +85,7 @@ const PlansProvider: React.FC<Props> = ({children}) => {
             addTolocalStorage();
             setCurrentPlan(undefined);
         }
-    }, [allPlans]);
+    }, [activePlans, deletedPlans]);
 
     function addNewPlan(): void {
 
@@ -81,7 +99,7 @@ const PlansProvider: React.FC<Props> = ({children}) => {
             tasks: [],
             barColors: getRandomColors()
         };
-        setAllPlans(prevPlans => [...prevPlans, newPlan]);
+        setActivePlans(prevPlans => [...prevPlans, newPlan]);
         setCurrentPlan(newPlan);
     };
 
@@ -92,8 +110,8 @@ const PlansProvider: React.FC<Props> = ({children}) => {
     function editPlanInfo(formData: PlanType, planId: string): void {
 
         const {title, description, deadline} = formData;
-        setAllPlans((prevValue) => {
-            return prevValue.map(plan => {
+        setActivePlans((prev) => {
+            return prev.map(plan => {
                 if(plan.id === planId) {
                     return {
                         ...plan,
@@ -109,12 +127,18 @@ const PlansProvider: React.FC<Props> = ({children}) => {
     };
 
     function deletePlan(planId: string):void {
-        setAllPlans(prevPlans => prevPlans.filter(plan => plan.id !== planId));
+        const targetedPlan = activePlans.find(plan => plan.id === planId);
+
+        if(targetedPlan) {
+            setDeletedPlans(prev => [...prev, targetedPlan]);
+        };
+
+        setActivePlans(prevPlans => prevPlans.filter(plan => plan.id !== planId));
     };
 
     function addNewTask(taskData: TaskType, planId: string): void {
-        setAllPlans(prevValue => {
-            return prevValue.map(plan => {
+        setActivePlans(prev => {
+            return prev.map(plan => {
                 if(plan.id === planId) {
                     return {
                         ...plan,
@@ -127,8 +151,8 @@ const PlansProvider: React.FC<Props> = ({children}) => {
     };
 
     function deleteTask(planId: string, taskId: string): void {
-        setAllPlans(prevValue => {
-            return prevValue.map(plan => {
+        setActivePlans(prev => {
+            return prev.map(plan => {
                 if(plan.id === planId) {
                     // remove it from the current stage
                     const updatedTasks: TaskType[] = plan.tasks.filter(task => task.id !== taskId);
@@ -143,9 +167,18 @@ const PlansProvider: React.FC<Props> = ({children}) => {
         });
     };
 
+    function restorePlan(planId: string): void {
+        const targetedPlan = deletedPlans.find(plan => plan.id === planId);
+
+        if(!targetedPlan) return;
+
+        setDeletedPlans(prev => prev.filter(el => el.id !== planId));
+        setActivePlans(prev => [...prev, targetedPlan]);
+    };
+
     function updataTask(planId: string, updatedTask: TaskType): void {
-        setAllPlans(prevValue => {
-            return prevValue.map(plan => {
+        setActivePlans(prev => {
+            return prev.map(plan => {
                 if(plan.id === planId) {
                     const updataTasks: TaskType[] = plan.tasks.map(task => task.id === updatedTask.id? updatedTask : task);
                     const checkPlanStatus: boolean = updataTasks.every(task => task.stage === "done");
@@ -162,7 +195,20 @@ const PlansProvider: React.FC<Props> = ({children}) => {
     }
 
     return (
-        <PlansContext.Provider value={{allPlans, currentPlan, addNewPlan, showPlan, editPlanInfo, deletePlan, addNewTask, deleteTask, updataTask}}>
+        <PlansContext.Provider value={{
+            activePlans, 
+            deletedPlans,
+            currentPlan, 
+            isNewUser, 
+            addNewPlan, 
+            showPlan, 
+            editPlanInfo, 
+            deletePlan, 
+            restorePlan, 
+            addNewTask, 
+            deleteTask, 
+            updataTask, 
+        }}>
             {children}
         </PlansContext.Provider>
     );
