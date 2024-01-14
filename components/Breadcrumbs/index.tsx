@@ -1,8 +1,8 @@
 import { useRouter, usePathname } from "next/navigation";
 import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Tooltip from "@/components/Tooltip";
 import "./index.scss";
-import Tooltip from "../Tooltip";
 
 const Breadcrumbs: React.FC = () => {
     const router = useRouter();

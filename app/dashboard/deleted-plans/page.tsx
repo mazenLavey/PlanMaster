@@ -1,7 +1,7 @@
 import TrashSection from "@/components/TrashSection";
 
 
-const PlansTrash: React.FC = ()=>{
+const DeletedPlans: React.FC = ()=>{
 
     return (
         <main >
@@ -10,4 +10,4 @@ const PlansTrash: React.FC = ()=>{
     );
 };
 
-export default PlansTrash;
+export default DeletedPlans;

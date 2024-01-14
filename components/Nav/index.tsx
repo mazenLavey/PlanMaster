@@ -1,4 +1,4 @@
-import Logo from "../Logo";
+import Logo from "@/components/Logo";
 import styles from "./Nav.module.scss";
 import '@/styles/globals.scss';
 

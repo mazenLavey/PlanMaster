@@ -12,7 +12,7 @@ import dateFormat from "@/functions/dateFormat";
 import ProgressBar from "@/components/ProgressBar";
 import { useContext } from "react";
 import { PlansContext } from "@/contexts/PlansContext";
-import Tooltip from "../Tooltip";
+import Tooltip from "@/components/Tooltip";
 
 interface Props {
     data: PlanType,

@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import Link from "next/link";
 import routes from "@/routes";
+import Tooltip from '@/components/Tooltip';
 import "./index.scss";
-import Tooltip from '../Tooltip';
 
 type Props = {
     isActive: boolean;
