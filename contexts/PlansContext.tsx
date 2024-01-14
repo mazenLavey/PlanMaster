@@ -60,9 +60,9 @@ const PlansProvider: React.FC<Props> = ({children}) => {
         if (data) {
             const plans: DataStorage = JSON.parse(data);
     
-            setActivePlans(plans.activePlans);
-            setDeletedPlans(plans.deletedPlans);
-            setArchivedPlans(plans.archivedPlans);
+            setActivePlans(plans.activePlans?? []);
+            setDeletedPlans(plans.deletedPlans?? []);
+            setArchivedPlans(plans.archivedPlans?? []);
             setIsNewUser(false);
         };
     }, []);

@@ -11,7 +11,7 @@ const TrashSection: React.FC = ()=>{
     const {deletedPlans} = useContext(PlansContext);
 
     const renderDeletedPlans = () => {
-        return deletedPlans.map(el => <PlanCard key={el.id} data={el} isDeleted/>)
+        return deletedPlans?.map(el => <PlanCard key={el.id} data={el} isDeleted/>)
     };
 
     return (

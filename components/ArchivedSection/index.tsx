@@ -11,7 +11,7 @@ const ArchivedSection: React.FC = ()=>{
     const {archivedPlans} = useContext(PlansContext);
 
     const renderArchivedPlans = () => {
-        return archivedPlans.map(el => <PlanCard key={el.id} data={el} isDeleted/>)
+        return archivedPlans?.map(el => <PlanCard key={el.id} data={el} isDeleted/>)
     };
 
     return (
