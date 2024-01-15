@@ -21,7 +21,7 @@ const Charts: React.FC = () => {
             backgroundColor: [
                 '#ff9a7e',
                 '#3ed364',
-                '#2e4a67',
+                '#E5E5EA',
             ],
             borderWidth: 0,
             }]
