@@ -1,0 +1,88 @@
+@import '@/styles/index';
+
+.CurrentPlan {
+    @include flex-column(false);
+    gap: $gap-s;
+    flex-grow: 1;
+    padding: $padding-l;
+    background-color: $white;
+    border-radius: $radius-l;
+    box-shadow: 0 5px 5px $shadow-light;
+}
+
+.CurrentPlan__Header {
+    @include flex-row(false);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.CurrentPlan__Title {
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 500px;
+    font-weight: 400;
+}
+
+.CurrentPlan__Limitation {
+    @include flex-row(false);
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: $gap-s;
+    font-size: var(--font-200);
+    color: $font-dark-gray;
+
+    & span::first-letter {
+        text-transform: capitalize;
+    }
+}
+
+.CurrentPlan__Description {
+    color: $font-dark-gray;
+    font-size: var(--font-300);
+
+    &::first-letter {
+        text-transform: capitalize;
+    }
+}
+
+.CurrentPlan__Badge {
+    @include flex-row(true);
+    gap: $gap-xs;
+    width: fit-content;
+    padding: 0.25rem $padding-s;
+    border-radius: $radius-m;
+    font-size: var(--font-200);
+    color: $font-white;
+    background-color: $black-1;
+    text-transform: capitalize;
+    position: relative;
+
+    &--Deadline {
+        padding-bottom: $padding-s;
+        background-color: transparent;
+        color: $font-black;
+
+        &::after {
+            content: "";
+            position: absolute;
+            right: 0px;
+            bottom: -16px;
+            height: 20px;
+            width: 100%;
+            border: 1px dashed;
+            border-radius: 3px;
+            border-color: $orange-0 $orange-0 transparent transparent;
+        }
+    }
+}
+
+.CurrentPlan__List {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    justify-content: space-between;
+    gap: $gap-l;
+    flex-grow: 1;
+    margin-top: 1rem;
+}

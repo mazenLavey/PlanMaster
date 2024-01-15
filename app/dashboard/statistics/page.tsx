@@ -1,13 +1,11 @@
-import Charts from "@/components/Charts";
+import Statistics from "@/views/Statistics";
 
 
-const statistics: React.FC = ()=>{
+const Page: React.FC = ()=>{
 
     return (
-        <main >
-            <Charts />
-        </main>
+        <Statistics />
     );
 };
 
-export default statistics;
+export default Page;

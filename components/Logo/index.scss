@@ -1,0 +1,10 @@
+@use "@/styles/index";
+
+.Logo__Img {
+    filter: grayscale(0.1) hue-rotate(355deg);
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.5;
+    }
+}

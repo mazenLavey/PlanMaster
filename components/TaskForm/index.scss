@@ -1,0 +1,57 @@
+@import "@/styles/index";
+
+.TaskForm {
+    @include flex-column(false);
+    gap: $gap-l;
+}
+
+.TaskForm__Body {
+    @include flex-column(false);
+    gap: $gap-s;
+}
+
+.TaskForm__Label {
+    font-size: var(--font-400);
+    &::first-letter {
+        text-transform: capitalize;
+    }
+}
+
+.TaskForm__Input, .TaskForm__Textarea {
+    padding: $padding-s;
+    border-radius: $radius-s;
+    background-color: $gray-4;
+    color: $font-dark-gray;
+    border: 1px solid transparent;
+
+    &:focus {
+        background-color: $white;
+        border-color: $orange-0;
+        color: $font-black;
+    }
+}
+
+.TaskForm__Input {
+    height: 2rem;
+}
+
+.TaskForm__Subtasks {
+    margin-top: 1rem;
+}
+
+.TaskForm__SubtasksTitle {
+    margin-bottom: 0.5rem;
+}
+
+.TaskForm__SubtasksGrid {
+    @include flex-column(false);
+    gap: $gap-s;
+}
+
+.TaskForm__NewTaskBtn {
+    margin-top: 0.5rem;
+    color: $orange-0;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+

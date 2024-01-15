@@ -1,8 +1,8 @@
-import '@/styles/globals.scss';
 import { PlansProvider } from '@/contexts/PlansContext';
 import { Metadata } from 'next';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import './globals.scss';
 
 export const metadata: Metadata = {
   title: 'Plan Master',
@@ -37,11 +37,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <PlansProvider>
-          <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+          <div className='app'>
             <Nav />
-            <div className='container'>
+            <main className='container'>
               {children}
-            </div>
+            </main>
             <Footer />
           </div>
         </PlansProvider>

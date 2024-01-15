@@ -1,0 +1,11 @@
+@import "@/styles/index";
+
+.PlansSlider {
+    @include flex-row(false);
+    gap: $gap-l;
+    padding: 1rem 0;
+    overflow-x: auto;
+    
+    @include custom-scroll;
+}
+

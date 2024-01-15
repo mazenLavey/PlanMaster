@@ -1,0 +1,41 @@
+@import "@/styles/index";
+
+.TaskSection__Header {
+    @include flex-row(false);
+    align-items: center;
+    gap: $gap-s;
+}
+
+.TaskSection__Title {
+    font-size: var(--font-300);
+    font-weight: 400;
+}
+
+.TaskSection__Badge {
+    @include flex-row(true);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: $red;
+    font-size: var(--font-200);
+    color: $font-white;
+    font-weight: 800;
+
+    &--InProcess {
+        background-color: $orange-2;
+    }
+
+    &-Done {
+        background-color: $green;
+    }
+}
+
+.TaskSection__Tasks {
+    @include flex-column(false);
+    padding: $padding-s;
+    border: 1px dashed $gray-2;
+    border-radius: $radius-l;
+    gap: $gap-s;
+    min-height: 200px;
+    margin-top: 0.5rem;
+}

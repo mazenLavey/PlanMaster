@@ -1,13 +1,10 @@
-import ArchivedSection from "@/components/ArchivedSection";
+import FinishedPlans from "@/views/FinishedPlans";
 
-
-const FinishedPlans: React.FC = ()=>{
+const Page: React.FC = ()=>{
 
     return (
-        <main >
-            <ArchivedSection />
-        </main>
+        <FinishedPlans />
     );
 };
 
-export default FinishedPlans;
+export default Page;

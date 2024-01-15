@@ -1,10 +1,10 @@
-
-import styles from "./Footer.module.scss";
+import "./index.scss";
 
 const Footer: React.FC = ()=>{
     return (
-        <footer className={`${styles.wrapper} container`}>
-                <p>Made by <span>Mazen Lavey</span></p>
+        <footer className="Footer container">
+            <p className="Footer__Text">Made by</p>
+            <p className="Footer__Text Footer__Text--Orange">Mazen</p>
         </footer>
     );
 };

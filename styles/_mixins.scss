@@ -17,3 +17,51 @@
         justify-content: center;
     }
 }
+
+@mixin custom-scroll() {
+    scrollbar-width: thin;
+    scrollbar-color: $orange-0 $gray-3;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $orange-0;
+        border-radius: 10px;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: $gray-3;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: $orange-2;
+    }
+}
+
+@mixin mobile {
+    @media (max-width: 575px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: 576px) and (max-width: 991px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: 992px) {
+        @content;
+    }
+}
+
+@mixin custom-screen($min, $max) {
+    @media (min-width: $min) and (max-width: $max) {
+        @content;
+    }
+}
+

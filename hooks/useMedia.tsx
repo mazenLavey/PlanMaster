@@ -8,7 +8,7 @@ const useMedia= () => {
     const [isDesktopScreen, setIsDesktopScreen] = useState(false);
     const [isLargeScreen, setIsLargeScreen] = useState(false);
 
-    function getMediaSize() {
+    const getMediaSize = () => {
         if (window.matchMedia("(max-width: 575px)").matches) {
             setIsMobileScreen(true);
             setIsTabletScreen(false);

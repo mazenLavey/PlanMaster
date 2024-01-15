@@ -1,0 +1,26 @@
+@import "@/styles/index";
+
+.EmptyDashboard {
+    @include flex-column(false);
+    align-items: center;
+    gap: $gap-l;
+}
+
+.EmptyDashboard__Text {
+    border-radius: $radius-l;
+    background-color: $white;
+    padding: $padding-l;
+    width: 100%;
+}
+
+.EmptyDashboard__ImgContainer {
+    position: relative;
+    width: 100%;
+    height: 50vh;    
+}
+
+.EmptyDashboard__Img {
+    mix-blend-mode: darken;
+    object-fit: contain;
+    opacity: 0.5;
+}

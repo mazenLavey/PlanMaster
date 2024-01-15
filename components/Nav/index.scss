@@ -1,0 +1,13 @@
+@import "@/styles/index";
+
+.Nav {
+    padding: $padding-m 0;
+    height: 60px;
+}
+
+.Nav__Wrapper {
+    @include flex-row(false);
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}

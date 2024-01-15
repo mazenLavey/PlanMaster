@@ -1,0 +1,16 @@
+@import "@/styles/index";
+
+.ProgressBar {
+    height: 0.5rem;
+    width: 100%;
+    background-color: $gray-5;
+    border-radius: $radius-s;
+    overflow: hidden;
+}
+
+.ProgressBar__Inner {
+    display: block;
+    width: 0%;
+    height: 100%;
+    transition: 0.3s;
+}
