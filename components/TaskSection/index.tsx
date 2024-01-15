@@ -1,6 +1,8 @@
 import TaskCard from '@/components/TaskCard';
-import styles from './TaskSection.module.scss';
 import { PlanType, TaskStage } from '@/types/interfaces';
+import classNames from 'classnames';
+import { TASK_STAGES, TASK_STAGES_TEXT } from '@/constants';
+import './index.scss';
 
 interface Props {
     currentPlanData: PlanType,
@@ -10,8 +12,7 @@ interface Props {
 const TaskSection: React.FC<Props> = ({currentPlanData, section})=>{
     const tasksSum = currentPlanData.tasks.filter(task => task.stage === section).length;
     const tasksSumText = tasksSum > 0? tasksSum : 0;
-    const sectionTypeText = section === "toDo" ? `To Do`: section === "inProcess"? `In Process` : `Done`;
-    const sectionClassName = section === "toDo" ? "": section === "inProcess"? styles.inProcess : styles.done;
+    const sectionTypeText = TASK_STAGES_TEXT[section];
     
     const renderTasks = currentPlanData?.tasks.map((el, index) => {
         if(el.stage === section) {
@@ -19,12 +20,15 @@ const TaskSection: React.FC<Props> = ({currentPlanData, section})=>{
         }});
 
     return (
-        <section className={styles.wrapper}>
-            <div className={styles.title}>
-                <h3 className={styles.text}>{sectionTypeText}</h3>
-                <span className={`${styles.circle} ${sectionClassName}`}>{tasksSumText}</span>
+        <section className="TaskSection">
+            <div className="TaskSection__Header">
+                <h3 className="TaskSection__Title">{sectionTypeText}</h3>
+                <span className={classNames("TaskSection__Badge", {
+                    "TaskSection__Badge--InProcess": section === TASK_STAGES.inProcess,
+                    "TaskSection__Badge--Done": section === TASK_STAGES.done,
+                })}>{tasksSumText}</span>
             </div>
-            <div className={styles.tasks}>
+            <div className="TaskSection__Tasks">
                 {renderTasks}
             </div>
         </section>

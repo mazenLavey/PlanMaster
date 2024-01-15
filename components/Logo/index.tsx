@@ -1,18 +1,19 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
-import styles from "./Logo.module.scss";
+import Image from 'next/image';
+import "./index.scss";
 
 const Logo: React.FC = ()=>{
     const router = useRouter();
 
-    function handleClick(): void {
+    const handleClick = (): void => {
         router.push('/');
     }
 
     return (
-        <div className={styles.wrapper} onClick={handleClick}>
-            <img src='/assets/logo.png' alt='logo' width={40} height={40}/>
+        <div className="Logo" onClick={handleClick}>
+            <Image className="Logo__Img" src='/assets/logo.png' alt='logo' width={40} height={40}/>
         </div>
     );
 };

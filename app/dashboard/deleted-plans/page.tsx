@@ -1,13 +1,11 @@
-import TrashSection from "@/components/TrashSection";
+import DeletedPlans from "@/views/DeletedPlans";
 
 
-const DeletedPlans: React.FC = ()=>{
+const Page: React.FC = ()=>{
 
     return (
-        <main >
-            <TrashSection />
-        </main>
+        <DeletedPlans />
     );
 };
 
-export default DeletedPlans;
+export default Page;

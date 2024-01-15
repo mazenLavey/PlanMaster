@@ -4,9 +4,9 @@ import { PlansContext } from "@/contexts/PlansContext";
 import { useContext, useEffect, useState } from "react";
 import { TaskType, SubTask } from "@/types/interfaces";
 import { nanoid } from "nanoid";
-import styles from "./TaskForm.module.scss";
-import stylesBtns from "@/styles/Buttons.module.scss";
+import Btn from "@/components/Btn";
 import SubTaskSlot from "@/components/SubTaskSlot/SubTaskSlot";
+import "./index.scss";
 
 type action = "edit" | "new"
 
@@ -30,7 +30,7 @@ const TaskForm: React.FC<Props> = ({currentPlanId, taskData, action, closePopup}
 
     useEffect(()=>{
         // adding subtasks data to plan array
-        function collectAllData() {
+        const collectAllData = () => {
             setFormData(prevValue => {
                 return {
                     ...prevValue,
@@ -42,7 +42,7 @@ const TaskForm: React.FC<Props> = ({currentPlanId, taskData, action, closePopup}
     }, [subTasksArray])
 
     // handle form input changes
-    function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         const {value, name} = e.target;
         setFormData(prevValue => {
             return {
@@ -53,13 +53,13 @@ const TaskForm: React.FC<Props> = ({currentPlanId, taskData, action, closePopup}
     };
 
     // add new subtask when clicking on the add button
-    function addNewSubTaskField(e: React.MouseEvent<HTMLButtonElement>) {
+    const addNewSubTaskField = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
         const subTask: SubTask = newSubTask();
         setSubTaskArray(prev => [...prev, subTask]);
     }
 
-    function newSubTask():SubTask {
+    const newSubTask = (): SubTask => {
         const uniqueId = nanoid();
         const newSubTask: SubTask = {
             id: uniqueId,
@@ -70,7 +70,7 @@ const TaskForm: React.FC<Props> = ({currentPlanId, taskData, action, closePopup}
     }
 
     // receiving data from subtask children
-    function updateSubTasks(slotId: string, newtitle: string ): void {
+    const updateSubTasks = (slotId: string, newtitle: string ): void => {
         setSubTaskArray(prevValues => {
             return prevValues.map(subTask => {
                 if (subTask.id === slotId) {
@@ -86,11 +86,11 @@ const TaskForm: React.FC<Props> = ({currentPlanId, taskData, action, closePopup}
     };
 
     // delete subtask
-    function deleteSubTask(slotId: string): void {
+    const deleteSubTask = (slotId: string): void => {
         setSubTaskArray(prevValue => prevValue.filter(subtask => subtask.id !== slotId));
     }
     
-    function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         e.stopPropagation();
 
@@ -103,22 +103,25 @@ const TaskForm: React.FC<Props> = ({currentPlanId, taskData, action, closePopup}
     };
 
     return (
-        <form onSubmit={handleSubmit} className={styles.wrapper}>
-            <div className={styles.form}>
-                <label htmlFor="title">title</label>
-                <input type="text" name="title" id="title" value={formData.title} onChange={handleChange} required/>
+        <form onSubmit={handleSubmit} className="TaskForm">
+            <div className="TaskForm__Body">
+                <label className="TaskForm__Label" htmlFor="title">title</label>
+                <input className="TaskForm__Input" type="text" name="title" id="title" value={formData.title} onChange={handleChange} required/>
 
-                <label htmlFor="taskDescription">shortly description the task</label>
-                <textarea name="taskDescription" id="taskDescription" value={formData.taskDescription} onChange={handleChange}/>
-                <fieldset>
-                    <legend>SubTasks</legend>
-                    <div className={styles.subTasksContainer}>
+                <label className="TaskForm__Label" htmlFor="taskDescription">shortly description the task</label>
+                <textarea className="TaskForm__Textarea" name="taskDescription" id="taskDescription" value={formData.taskDescription} onChange={handleChange}/>
+                
+                <fieldset className="TaskForm__Subtasks">
+                    <legend className="TaskForm__SubtasksTitle">SubTasks</legend>
+                    <div className="TaskForm__SubtasksGrid">
                         {subTasksArray.map(el => <SubTaskSlot key={el.id} slotId={el.id} subtaskData={el} updateSubTasks={updateSubTasks} deleteSubTask={()=>deleteSubTask(el.id)}/>)}
                     </div>
-                    <button type="button" onClick={addNewSubTaskField} className={styles.addTaskBtn}>+ add subtask</button>
+                    <button className="TaskForm__NewTaskBtn" type="button" onClick={addNewSubTaskField}>+ add subtask</button>
                 </fieldset>
             </div>
-            <button className={stylesBtns.button}>{action === "new"? "add": "save"}</button>
+            <Btn>
+                {action === "new"? "add": "save"}
+            </Btn>
         </form>
     );
 };

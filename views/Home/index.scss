@@ -1,0 +1,49 @@
+@import '@/styles/index';
+
+.Home {
+    display: grid;
+    grid-template-rows: 1fr 1.5fr;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 110px);
+    gap: 1rem;
+
+
+    @include desktop {
+        grid-template-rows: unset;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.Home__Header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $gap-s;
+}
+
+.Home__TitleWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $gap-s;
+}
+
+.Home__Title {
+    text-transform: capitalize;
+    text-align: center;
+
+    &--Orange {
+        color: $orange-0;
+    }
+}
+
+.Home__ImgContainer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    & > img {
+        object-fit: contain;
+    }
+}

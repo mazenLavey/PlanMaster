@@ -1,0 +1,29 @@
+@import "@/styles/index";
+
+.SubTaskSlot {
+    @include flex-row(true);
+    gap: $gap-s;
+}
+
+.SubTaskSlot__Input {
+    flex-grow: 1;
+    padding: $padding-s;
+    border-radius: $radius-s;
+    background-color: $gray-4;
+    color: $font-dark-gray;
+    border: 1px solid transparent;
+
+    &:focus {
+        background-color: $white;
+        border-color: $orange-0;
+        color: $font-black;
+    }
+}
+
+.SubTaskSlot__Btn {
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.5;
+    }
+}

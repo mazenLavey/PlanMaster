@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faXmark, faPen, faCheck, faRotateLeft, faFlagCheckered } from '@fortawesome/free-solid-svg-icons';
 import { faCircleCheck, faCircleStop } from '@fortawesome/free-regular-svg-icons';
 import Tooltip from '@/components/Tooltip';
+import classNames from 'classnames';
 import './index.scss';
 
 interface Props {
@@ -24,7 +25,7 @@ const TaskCard: React.FC<Props> = ({taskData, planId})=>{
     const [task] = useState<TaskType>(taskData);
     const checkAllDone = task.subTasks.every(subtask => subtask.status === true);
 
-    function handleClick(e: React.MouseEvent<HTMLButtonElement>): void {
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
         e.stopPropagation();
         const target = e.currentTarget;
         const actionType: OperationType = target.dataset.type as OperationType;
@@ -76,7 +77,12 @@ const TaskCard: React.FC<Props> = ({taskData, planId})=>{
                         </>
                     :task?.stage === "inProcess"?
                         <>
-                            <button className={`TaskCard__Btn ${checkAllDone? "": "TaskCard__Btn--Disabled"}`} data-type='done' onClick={handleClick}>
+                            <button 
+                                className={classNames("TaskCard__Btn", {
+                                    "TaskCard__Btn--Disabled": !checkAllDone,
+                                })} 
+                                data-type='done' 
+                                onClick={handleClick}>
                                 <FontAwesomeIcon icon={faCheck} />
                                 check
                             </button>

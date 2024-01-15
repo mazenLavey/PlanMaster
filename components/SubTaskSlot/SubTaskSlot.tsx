@@ -4,7 +4,7 @@ import { SubTask } from "@/types/interfaces";
 import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import styles from "./SubTaskSlot.module.scss";
+import "./index.scss";
 
 interface Props {
     slotId: string,
@@ -20,7 +20,7 @@ const SubTaskSlot: React.FC<Props> = ({slotId, subtaskData, updateSubTasks, dele
         status: subtaskData?.status || false
     });
 
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>): void {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         const {value, id} = e.target;
         setInputData(prevValue => {
             return {
@@ -32,9 +32,9 @@ const SubTaskSlot: React.FC<Props> = ({slotId, subtaskData, updateSubTasks, dele
     };
 
     return (
-        <div className={styles.wrapper}>
-            <input type="text" name={slotId} id={slotId} onChange={handleChange} value={inputData.title} required/>
-            <button type="button" onClick={deleteSubTask}>
+        <div className="SubTaskSlot">
+            <input className="SubTaskSlot__Input" type="text" name={slotId} id={slotId} onChange={handleChange} value={inputData.title} required/>
+            <button className="SubTaskSlot__Btn" type="button" onClick={deleteSubTask}>
                 <FontAwesomeIcon icon={faXmark} width={20}/>
             </button>
         </div>

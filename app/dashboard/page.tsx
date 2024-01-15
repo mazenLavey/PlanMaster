@@ -1,13 +1,10 @@
 import DashboardResolver from "@/components/DashboardResolver";
-import styles from './PlanMasterDashboard.module.scss'
 
-const PlanMasterDashboard: React.FC = ()=>{
+const Dashboard: React.FC = ()=>{
 
     return (
-        <main className={styles.wrapper}>
-            <DashboardResolver />
-        </main>
+        <DashboardResolver />
     );
 };
 
-export default PlanMasterDashboard;
+export default Dashboard;

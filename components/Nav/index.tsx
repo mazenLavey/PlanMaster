@@ -1,11 +1,10 @@
 import Logo from "@/components/Logo";
-import styles from "./Nav.module.scss";
-import '@/styles/globals.scss';
+import "./index.scss";
 
 const Nav: React.FC = ()=>{
     return (
-        <header className={styles.navbar}>
-            <div className={` ${styles.wrapper} container`}>
+        <header className="Nav">
+            <div className="Nav__Wrapper container">
                 <Logo />
                 <nav>
                     <div></div>
