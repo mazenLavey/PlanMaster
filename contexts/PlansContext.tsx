@@ -4,7 +4,7 @@ import { createContext, useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { DataStorage, PlanType, TaskType} from "@/types/interfaces";
 import getRandomColors from "@/functions/getRandomColors";
-import { LOCAL_STORAGE_KEY } from "@/constants";
+import { LOCAL_STORAGE_KEY, TASK_STAGES } from "@/constants";
 
 type Props = {
     children: React.ReactNode
@@ -207,18 +207,22 @@ const PlansProvider: React.FC<Props> = ({children}) => {
     };
 
     const updataTask = (planId: string, updatedTask: TaskType): void => {
+        const targetedPlan = activePlans.find(plan => plan.id === planId);
+
+        if(!targetedPlan) return;
+
+        const checkPlanStatus: boolean = targetedPlan.tasks.every(task => task.stage === TASK_STAGES.done);
+        const updataTasks: TaskType[] = targetedPlan.tasks.map(task => task.id === updatedTask.id? updatedTask : task);
+
+
         setActivePlans(prev => {
             return prev.map(plan => {
-                if(plan.id === planId) {
-                    const updataTasks: TaskType[] = plan.tasks.map(task => task.id === updatedTask.id? updatedTask : task);
-                    const checkPlanStatus: boolean = updataTasks.every(task => task.stage === "done");
-                    return {
-                        ...plan,
-                        status: checkPlanStatus,
-                        tasks: updataTasks
-                    };
-                } else {
-                    return plan;
+                if (plan.id !== planId) return plan;
+
+                return {
+                    ...plan,
+                    status: checkPlanStatus,
+                    tasks: updataTasks
                 };
             });
         });

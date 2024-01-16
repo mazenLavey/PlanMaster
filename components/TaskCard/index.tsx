@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { PlansContext } from '@/contexts/PlansContext';
 import { useToggle } from '@/hooks/useToggle';
 import { TaskType, OperationType, TaskStage } from '@/types/interfaces';
@@ -12,6 +12,7 @@ import {  faXmark, faPen, faCheck, faRotateLeft, faFlagCheckered } from '@fortaw
 import { faCircleCheck, faCircleStop } from '@fortawesome/free-regular-svg-icons';
 import Tooltip from '@/components/Tooltip';
 import classNames from 'classnames';
+import { OPERATIONS_TYPES, TASK_STAGES } from '@/constants';
 import './index.scss';
 
 interface Props {
@@ -21,47 +22,59 @@ interface Props {
 
 const TaskCard: React.FC<Props> = ({taskData, planId})=>{
     const {updataTask, deleteTask} = useContext(PlansContext);
+
     const [showPopup, handleToggle] = useToggle();
-    const [task] = useState<TaskType>(taskData);
-    const checkAllDone = task.subTasks.every(subtask => subtask.status === true);
+    const [task, setTask] = useState<TaskType | null>(null);
+    const [isAllDone, setIsAllDone] = useState<boolean>(false);
+
+    useEffect(() => {
+        if(!taskData) return;
+
+        const checkAllDone = taskData.subTasks.every(subtask => subtask.status === true);
+
+        setIsAllDone(checkAllDone);
+        setTask(taskData);
+    }, [taskData]);
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
         e.stopPropagation();
+        if(!task) return;
+
         const target = e.currentTarget;
         const actionType: OperationType = target.dataset.type as OperationType;
 
-        if(actionType === "delete") {
+        if(actionType === OPERATIONS_TYPES.delete) {
             deleteTask(planId, task.id);
-        } else {
-            let toStage: TaskStage = task.stage;
-
-            if(actionType === "start") {
-                toStage = "inProcess";
-            } else if(actionType === "stop") {
-                toStage = "toDo";
-            } else if(actionType === "done") {
-                if(checkAllDone) {
-                    toStage = "done";
-                }
-            } else if(actionType === "undo") {
-                toStage = "inProcess";
-            }
-
-            const updatedTask: TaskType = {
-                ...task,
-                stage: toStage
-            }
-            updataTask(planId, updatedTask);
+            return;
         } 
+        
+        let toStage: TaskStage = task.stage;
+
+        if(actionType === OPERATIONS_TYPES.start || actionType === OPERATIONS_TYPES.undo) {
+            toStage = TASK_STAGES.inProcess;
+
+        } else if(actionType === OPERATIONS_TYPES.stop) {
+            toStage = TASK_STAGES.toDo;
+
+        } else if(actionType === OPERATIONS_TYPES.done && isAllDone) {
+            toStage = TASK_STAGES.done;
+        } 
+
+        const updatedTask: TaskType = {
+            ...task,
+            stage: toStage
+        };
+
+        updataTask(planId, updatedTask);
     };
 
     return (
         <>
             <div className="TaskCard fade-in">
                 <div className="TaskCard__BtnWrapper">
-                    {task?.stage === "toDo"?
+                    {task?.stage === TASK_STAGES.toDo?
                         <>
-                            <button className="TaskCard__Btn" data-type='start' onClick={handleClick}>
+                            <button className="TaskCard__Btn" data-type={OPERATIONS_TYPES.start} onClick={handleClick}>
                                 <FontAwesomeIcon icon={faFlagCheckered} />
                                 start
                             </button>
@@ -70,18 +83,18 @@ const TaskCard: React.FC<Props> = ({taskData, planId})=>{
                                 edit
                             </button>
                             <Tooltip className='TaskCard__BtnTooltip' tooltipText="Delete task">
-                                <button className="TaskCard__Btn" data-type='delete' onClick={handleClick} title='Delete task'>
+                                <button className="TaskCard__Btn" data-type={OPERATIONS_TYPES.delete} onClick={handleClick}>
                                     <FontAwesomeIcon icon={faXmark} />
                                 </button>
                             </Tooltip>
                         </>
-                    :task?.stage === "inProcess"?
+                    :task?.stage === TASK_STAGES.inProcess?
                         <>
                             <button 
                                 className={classNames("TaskCard__Btn", {
-                                    "TaskCard__Btn--Disabled": !checkAllDone,
-                                })} 
-                                data-type='done' 
+                                    "TaskCard__Btn--Disabled": !isAllDone,
+                                    })} 
+                                data-type={OPERATIONS_TYPES.done}
                                 onClick={handleClick}>
                                 <FontAwesomeIcon icon={faCheck} />
                                 check
@@ -91,7 +104,7 @@ const TaskCard: React.FC<Props> = ({taskData, planId})=>{
                                 edit
                             </button>
                             <Tooltip className='TaskCard__BtnTooltip' tooltipText="Stop task">
-                                <button className="TaskCard__Btn" data-type='stop' onClick={handleClick}>
+                                <button className="TaskCard__Btn" data-type={OPERATIONS_TYPES.stop} onClick={handleClick}>
                                     <FontAwesomeIcon icon={faCircleStop} />
                                 </button>
                             </Tooltip>
@@ -102,19 +115,19 @@ const TaskCard: React.FC<Props> = ({taskData, planId})=>{
                                 <FontAwesomeIcon icon={faCircleCheck} />
                                 done
                             </button>
-                            <button className="TaskCard__Btn" data-type='undo' onClick={handleClick}>
+                            <button className="TaskCard__Btn" data-type={OPERATIONS_TYPES.undo} onClick={handleClick}>
                                 <FontAwesomeIcon icon={faRotateLeft} />
                                 undo
                             </button>
                         </>
                     }
                 </div>
-                <TaskInfo taskData={task} planId={planId} />
+                { task && <TaskInfo taskData={task} planId={planId} />}
             </div>
             {
-                showPopup &&
+                showPopup && task &&
                 <Popup closePopup={()=> handleToggle(false)}>
-                    <TaskForm taskData={task} currentPlanId={planId} action='edit'/>
+                    <TaskForm taskData={task} currentPlanId={planId} closePopup={()=> handleToggle(false)} action='edit'/>
                 </Popup>
             }
         </>

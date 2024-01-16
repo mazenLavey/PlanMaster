@@ -8,13 +8,21 @@ import Btn from "@/components/Btn";
 import SubTaskSlot from "@/components/SubTaskSlot/SubTaskSlot";
 import "./index.scss";
 
-type action = "edit" | "new"
+type action = "edit" | "new";
+
+const TASK_FORM_ACTIONS: {
+    edit: action,
+    new: action,
+} = {
+    edit: "edit",
+    new: "new",
+}
 
 interface Props {
     currentPlanId: string,
     taskData?: TaskType,
     action: action,
-    closePopup?: ()=> void
+    closePopup: ()=> void
 }
 
 const TaskForm: React.FC<Props> = ({currentPlanId, taskData, action, closePopup})=>{
@@ -94,11 +102,14 @@ const TaskForm: React.FC<Props> = ({currentPlanId, taskData, action, closePopup}
         e.preventDefault();
         e.stopPropagation();
 
-        if(action === "new") {
+        if(action === TASK_FORM_ACTIONS.new) {
+
             addNewTask(formData, currentPlanId);
-            closePopup? closePopup(): null;
-        } else if (action === "edit") {
+            closePopup();
+        } else if (action === TASK_FORM_ACTIONS.edit) {
+
             updataTask(currentPlanId, formData);
+            closePopup();
         }
     };
 
@@ -119,8 +130,8 @@ const TaskForm: React.FC<Props> = ({currentPlanId, taskData, action, closePopup}
                     <button className="TaskForm__NewTaskBtn" type="button" onClick={addNewSubTaskField}>+ add subtask</button>
                 </fieldset>
             </div>
-            <Btn>
-                {action === "new"? "add": "save"}
+            <Btn type="submit">
+                {action === TASK_FORM_ACTIONS.new? "add": "save"}
             </Btn>
         </form>
     );

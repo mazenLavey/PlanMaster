@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Tooltip from "@/components/Tooltip";
 import Btn from "@/components/Btn";
+import { TASK_STAGES } from "@/constants";
 import "./index.scss";
 
 interface Props {
@@ -60,9 +61,9 @@ const CurrentPlan: React.FC<Props> = ({currentPlanData}) => {
             <ProgressBar barWidth={barWidth} startColor="#3ed364" endColor="#ff746d"/>
 
             <div className="CurrentPlan__List">
-                <TaskSection currentPlanData={currentPlanData} section="toDo"/>
-                <TaskSection currentPlanData={currentPlanData} section="inProcess"/>
-                <TaskSection currentPlanData={currentPlanData} section="done"/>
+                <TaskSection currentPlanData={currentPlanData} section={TASK_STAGES.toDo}/>
+                <TaskSection currentPlanData={currentPlanData} section={TASK_STAGES.inProcess}/>
+                <TaskSection currentPlanData={currentPlanData} section={TASK_STAGES.done}/>
             </div>
         </div>
 

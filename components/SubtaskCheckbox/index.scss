@@ -1,0 +1,58 @@
+@import "@/styles/index";
+
+.SubtaskCheckbox {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: $gap-s;
+    padding-left: $padding-m;    
+}
+
+.SubtaskCheckbox__Checkbox {
+    appearance: none;
+    position: relative;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid $white;
+    border-radius: 3px;
+    cursor: pointer;
+
+    &--Disabled {
+        opacity: 0.5;
+        cursor: default;
+    }
+
+    &--Checked {
+        background-color: $white;
+
+        &::after {
+            content: "\2714";
+            position: absolute;
+            left: 60%;
+            top: 30%;
+            transform: translate(-50%, -50%);
+            color: $green;
+            font-size: var(--font-600);
+        }
+    }
+}
+
+.SubtaskCheckbox__Label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: var(--font-300);
+    cursor: pointer;
+
+    &::first-letter {
+        text-transform: capitalize;
+    }
+
+    &--Checked {
+        text-decoration: line-through;
+    }
+
+    &--Disabled {
+        opacity: 0.5;
+        cursor: default;
+    }
+}
