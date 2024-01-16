@@ -19,7 +19,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: $gap-s;
+    gap: $gap-l;
 }
 
 .Home__TitleWrapper {
@@ -32,6 +32,7 @@
 .Home__Title {
     text-transform: capitalize;
     text-align: center;
+    line-height: 50px;
 
     &--Orange {
         color: $orange-0;
