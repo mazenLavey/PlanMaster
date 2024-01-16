@@ -1,11 +1,11 @@
 'use client';
 
+import { useContext, useEffect, useState } from "react";
 import { PlansContext } from "@/contexts/PlansContext";
 import { SubTask } from "@/types/interfaces";
 import { TaskType } from "@/types/interfaces";
-import { useContext, useState } from "react";
+import SubtaskCheckbox from "../SubtaskCheckbox";
 import './index.scss';
-import classNames from "classnames";
 
 interface Props {
     taskData: TaskType,
@@ -15,9 +15,17 @@ interface Props {
 const TaskInfo: React.FC<Props> = ({taskData, planId}) => {
     const {updataTask} = useContext(PlansContext);
 
-    const [task, setTask] = useState<TaskType>(taskData);
+    const [task, setTask] = useState<TaskType | null>(null);
+
+    useEffect(() => {
+        if(!taskData) return;
+
+        setTask(taskData);
+    }, [taskData])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        if(!task) return;
+
         const {id, checked} = e.target;
 
         const updateSubTasks: SubTask[] = task.subTasks.map(subtask => {
@@ -43,40 +51,19 @@ const TaskInfo: React.FC<Props> = ({taskData, planId}) => {
         updataTask( planId , updatedTask);
     };
 
-    const subTaskElements = task.subTasks.map(el =>{
+    const subTaskElements = task?.subTasks.map(el =>{
         const isChecked = el.status;
         const isDisabled = task.stage === "toDo" || task.stage === "done"? true: false;
 
         return (
-            <div key={el.id} className="TaskInfo__Subtask">
-                <input 
-                    className={classNames("TaskInfo__Checkbox", {
-                        "TaskInfo__Checkbox--Checked": isChecked,
-                        "TaskInfo__Checkbox--Disabled": isDisabled,
-                    })} 
-                    type="checkbox" 
-                    name={el.id} 
-                    id={el.id} 
-                    checked={isChecked} 
-                    onChange={handleChange} 
-                    disabled={isDisabled}
-                />
-                <label 
-                    className={classNames("TaskInfo__Label", {
-                        "TaskInfo__Label--Checked": isChecked,
-                        "TaskInfo__Label--Disabled": isDisabled,
-                    })} 
-                    htmlFor={el.id}>
-                        {el.title}
-                </label>
-            </div>
+            <SubtaskCheckbox key={el.id} data={el} handleChange={handleChange} isChecked={isChecked} isDisabled={isDisabled} />
         );
     });
 
     return (
         <div className="TaskInfo">
-            <h5 className="TaskInfo__Title">{task.title}</h5>
-            <p className="TaskInfo__Brief">{task.taskDescription}</p>
+            <h5 className="TaskInfo__Title">{task?.title}</h5>
+            <p className="TaskInfo__Brief">{task?.taskDescription}</p>
             <div className="TaskInfo__Subtasks">
                 {subTaskElements}
             </div>

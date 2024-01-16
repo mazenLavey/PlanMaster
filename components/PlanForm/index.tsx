@@ -47,7 +47,7 @@ const PlanForm: React.FC<Props> = ({data, closePopup})=>{
                 <label className="PlanForm__Label" htmlFor="deadline">deadline</label>
                 <input className="PlanForm__Input PlanForm__Input--Date" type="date" name="deadline" id="deadline" onChange={handleChange} value={formData.deadline} min={todayDate}/>
             </div>
-            <Btn>
+            <Btn type="submit">
                 Save
             </Btn>
         </form>

@@ -8,10 +8,9 @@
     border-radius: $radius-l;
     background-color: $white;
     min-width: 200px;
-    box-shadow: 0px 5px 3px $shadow-light;
-    transition: 0.3s;
     border: 1px solid transparent;
     cursor: pointer;
+    transition: 0.3s;
 
     &:hover {
         background-color: $gray-4;
@@ -19,6 +18,7 @@
 
     &--Current {
         border: 1px solid $orange-0;
+        box-shadow: 0px 5px 3px $shadow-light;
     }
 }
 
