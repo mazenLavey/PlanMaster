@@ -57,7 +57,7 @@ const TaskCard: React.FC<Props> = ({taskData, planId})=>{
 
     return (
         <>
-            <div className="TaskCard">
+            <div className="TaskCard fade-in">
                 <div className="TaskCard__BtnWrapper">
                     {task?.stage === "toDo"?
                         <>

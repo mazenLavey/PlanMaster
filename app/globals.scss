@@ -69,14 +69,18 @@ body {
   background-image: linear-gradient(120deg, $bg-lightPurple, $bg-lightBlue);
   font-size: var(--font-400);
   letter-spacing: 0.5px;
-
-  @include custom-scroll;
+  
 }
 
 .app {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  overflow-x: hidden;
+
+  @include exclude-mobile {
+    @include custom-scroll;
+  }
 }
 
 img {
