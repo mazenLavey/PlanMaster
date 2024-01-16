@@ -17,8 +17,6 @@ const PlanForm: React.FC<Props> = ({data, closePopup})=>{
     const {editPlanInfo} = useContext(PlansContext);
     const todayDate = formatISO(new Date().getTime(), { representation: 'date' });
 
-    console.log(todayDate)
-
     const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const {name, value} = e.target;
 

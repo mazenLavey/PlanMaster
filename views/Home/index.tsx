@@ -20,9 +20,7 @@ const Home:React.FC = () => {
                     <h1 className="Home__Title">Achieve more with</h1>
                     <h1 className="Home__Title Home__Title--Orange">Plan Master</h1>
                 </div>
-                <Btn onClick={handleClick}>
-                    to Dashboard
-                </Btn>
+                <Btn onClick={handleClick}>Dashboard</Btn>
             </header>
             <div className="Home__ImgContainer">
                 <Image src="/assets/planmaster_hero_img.png" alt="task management" fill={true} placeholder='empty' priority={true}/>
