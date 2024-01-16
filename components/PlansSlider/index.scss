@@ -1,11 +1,28 @@
 @import "@/styles/index";
 
 .PlansSlider {
-    @include flex-row(false);
-    gap: $gap-l;
+    // overflow-x: hidden;
+}
+
+.PlansSlider__Swiper {
+    overflow: unset !important;
+}
+
+.PlansSlider__Slide {
+    width: fit-content !important;
+}
+
+.PlansSlider__SwiperWrapper {
     padding: 1rem 0;
-    overflow-x: auto;
-    
-    @include custom-scroll;
+}
+
+.PlansSlider__Pagination {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0.5rem;
+
+    & > .swiper-pagination-bullet-active {
+        background-color: $orange-0;
+    }
 }
 
