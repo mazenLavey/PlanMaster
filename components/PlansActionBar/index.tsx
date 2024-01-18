@@ -12,7 +12,7 @@ import classNames from "classnames";
 import "./index.scss";
 
 const PlansActionBar: React.FC = () => {
-    const { activePlans, deletedPlans, addNewPlan } = useContext(PlansContext);
+    const { activePlans, deletedPlans, addNewPlan, archivedPlans } = useContext(PlansContext);
 
     return(
         <div className="PlansActionBar">
@@ -22,10 +22,10 @@ const PlansActionBar: React.FC = () => {
                 {activePlans.length} {activePlans.length > 1 ? "plans" : "plan"}
             </h2>
             <div className="PlansActionBar__Actions">
-                <NavigationBtn route={routes.finishedPlans} tooltipText="Finished plans">
+                <NavigationBtn isDisabled={archivedPlans.length === 0} route={routes.finishedPlans} tooltipText="Finished plans">
                     <FontAwesomeIcon icon={faClipboardCheck} size="1x"/>
                 </NavigationBtn>
-                <NavigationBtn route={routes.statistics} tooltipText="Statistics">
+                <NavigationBtn isDisabled={activePlans.length === 0 && archivedPlans.length === 0 && deletedPlans.length === 0} route={routes.statistics} tooltipText="Statistics">
                     <FontAwesomeIcon icon={faChartPie} size="1x"/>
                 </NavigationBtn>
                 <NavigationBtn isDisabled={deletedPlans.length === 0} route={routes.trash} tooltipText="Deleted plans">

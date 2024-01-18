@@ -38,8 +38,7 @@
 }
 
 .SubtaskCheckbox__Label {
-    overflow: hidden;
-    text-overflow: ellipsis;
+    word-break: break-word;
     font-size: var(--font-300);
     cursor: pointer;
 
