@@ -10,15 +10,13 @@
 .TaskInfo__Title {
     font-size: var(--font-400);
     text-transform: capitalize;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    word-break: break-word;
 }
 
 .TaskInfo__Brief {
     color: $font-black;
     font-size: var(--font-300);
-    overflow: hidden;
-    text-overflow: ellipsis;
+    word-break: break-word;
 
     &::first-letter {
         text-transform: capitalize

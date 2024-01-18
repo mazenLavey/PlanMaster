@@ -15,7 +15,7 @@ import BarChart from '@/components/BarChart';
 const Statistics: React.FC = () => {
     const {activePlans, deletedPlans, archivedPlans} = useContext(PlansContext);
 
-    const finishedPlans = activePlans.filter(plan => plan.status).length + archivedPlans.length;
+    const finishedPlans = activePlans.filter(plan => plan.isFinished).length + archivedPlans.length;
     
     const getTasksFromPlans = (plans: PlanType[] ): (TaskType | null)[] =>  {
         return plans.map(plan => plan.tasks.length === 0 ? null : plan.tasks).filter(task => task !== null).flat();

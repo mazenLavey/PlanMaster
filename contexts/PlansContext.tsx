@@ -99,7 +99,7 @@ const PlansProvider: React.FC<Props> = ({children}) => {
         const newPlan: PlanType = {
             id: nanoid(),
             timeStamp: new Date().getTime(),
-            status: false,
+            isFinished: false,
             title: "",
             description: "",
             deadline: "",
@@ -208,12 +208,10 @@ const PlansProvider: React.FC<Props> = ({children}) => {
 
     const updataTask = (planId: string, updatedTask: TaskType): void => {
         const targetedPlan = activePlans.find(plan => plan.id === planId);
-
+        
         if(!targetedPlan) return;
-
-        const checkPlanStatus: boolean = targetedPlan.tasks.every(task => task.stage === TASK_STAGES.done);
         const updataTasks: TaskType[] = targetedPlan.tasks.map(task => task.id === updatedTask.id? updatedTask : task);
-
+        const isFinished: boolean = updataTasks.every(task => task.stage === TASK_STAGES.done);
 
         setActivePlans(prev => {
             return prev.map(plan => {
@@ -221,7 +219,7 @@ const PlansProvider: React.FC<Props> = ({children}) => {
 
                 return {
                     ...plan,
-                    status: checkPlanStatus,
+                    isFinished: isFinished,
                     tasks: updataTasks
                 };
             });

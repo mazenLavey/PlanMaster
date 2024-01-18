@@ -6,7 +6,7 @@ export type OperationType = "start" | "stop" | "done" | "undo" | "delete";
 export interface PlanType {
     readonly id: string,
     readonly timeStamp: number;
-    status: boolean,
+    isFinished: boolean,
     title: string,
     description: string,
     deadline: string,

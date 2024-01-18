@@ -41,6 +41,7 @@
 .CurrentPlan__Description {
     color: $font-dark-gray;
     font-size: var(--font-300);
+    word-break: break-word;
 
     &::first-letter {
         text-transform: capitalize;
