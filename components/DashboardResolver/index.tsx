@@ -10,7 +10,7 @@ import PlansSlider from "@/components/PlansSlider";
 import "./index.scss";
 
 const DashboardResolver: React.FC = () => {
-    const {currentPlan} = useContext(PlansContext);
+    const {currentPlan, isDataFetching} = useContext(PlansContext);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(()=>{
@@ -23,7 +23,7 @@ const DashboardResolver: React.FC = () => {
         }
     }, []);
 
-    if(isLoading) {
+    if(isLoading || isDataFetching) {
         return <Spinner />
     }
 

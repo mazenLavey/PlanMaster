@@ -1,11 +1,21 @@
-import { BarLoader } from "react-spinners";
+import { BarLoader, BeatLoader } from "react-spinners";
 import "./index.scss";
 
-const Spinner: React.FC = ()=>{
+type Props = {
+    type?: "grid" | "beat",
+    color?: string,
+}
+
+const Spinner: React.FC<Props> = ({ type = "grid", color })=>{
+    const SIZE = 8;
 
     return (
         <div className="Spinner__Container fade-in">
-            <BarLoader color="#f67f5d" />
+            {type === "grid" ?
+                <BarLoader color={color ?? "#f67f5d"} />
+                :
+                <BeatLoader color={color ?? "#ffff"} size={SIZE}/>
+            }
         </div>
     );
 };

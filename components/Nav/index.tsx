@@ -1,4 +1,5 @@
 import Logo from "@/components/Logo";
+import UserAuthStatus from "@/components/UserAuthStatus";
 import "./index.scss";
 
 const Nav: React.FC = ()=>{
@@ -7,7 +8,7 @@ const Nav: React.FC = ()=>{
             <div className="Nav__Wrapper container">
                 <Logo />
                 <nav>
-                    <div></div>
+                    <UserAuthStatus />
                 </nav>
             </div>
         </header>

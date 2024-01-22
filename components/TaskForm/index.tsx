@@ -6,6 +6,7 @@ import { TaskType, SubTask } from "@/types/interfaces";
 import { nanoid } from "nanoid";
 import Btn from "@/components/Btn";
 import SubTaskSlot from "@/components/SubTaskSlot/SubTaskSlot";
+import InputText from "@/components/InputText";
 import "./index.scss";
 
 type action = "edit" | "new";
@@ -116,11 +117,8 @@ const TaskForm: React.FC<Props> = ({currentPlanId, taskData, action, closePopup}
     return (
         <form onSubmit={handleSubmit} className="TaskForm">
             <div className="TaskForm__Body">
-                <label className="TaskForm__Label" htmlFor="title">title</label>
-                <input className="TaskForm__Input" type="text" name="title" id="title" value={formData.title} onChange={handleChange} required/>
-
-                <label className="TaskForm__Label" htmlFor="taskDescription">shortly description the task</label>
-                <textarea className="TaskForm__Textarea" name="taskDescription" id="taskDescription" value={formData.taskDescription} onChange={handleChange}/>
+                <InputText label="title" name="title" id="title" value={formData.title} onChange={handleChange} required/>
+                <InputText label="shortly description the task" tag="textarea" name="taskDescription" id="taskDescription" value={formData.taskDescription} onChange={handleChange}/>
                 
                 <fieldset className="TaskForm__Subtasks">
                     <legend className="TaskForm__SubtasksTitle">SubTasks</legend>

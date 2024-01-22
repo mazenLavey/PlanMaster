@@ -39,8 +39,8 @@ const PlanCard: React.FC<Props> = ({
     const [showPopup, handleToggle] = useToggle();
 
     const creationDate = () => format(data.timeStamp, 'dd MMM, yyyy');
-    const tasksSum = (): number => data.tasks.length;
-    const doneTasks = (): number => (data.tasks.filter(task => task.stage === "done")).length;
+    const tasksSum = (): number => data?.tasks?.length;
+    const doneTasks = (): number => (data?.tasks?.filter(task => task.stage === "done"))?.length;
     const barWidth= (): number => (doneTasks()/tasksSum())*100;
 
 

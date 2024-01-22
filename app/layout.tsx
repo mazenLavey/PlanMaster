@@ -1,8 +1,10 @@
 import { PlansProvider } from '@/contexts/PlansContext';
+import { AuthProvider } from '@/contexts/AuthContext';
 import { Metadata } from 'next';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import './globals.scss';
+import './index.scss';
 
 export const metadata: Metadata = {
   title: 'Plan Master',
@@ -36,15 +38,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <PlansProvider>
-          <div className='app'>
+        <AuthProvider>
+          <PlansProvider>
+          <div className='App'>
             <Nav />
-            <main className='container'>
+            <main className='App__Inner container'>
               {children}
             </main>
             <Footer />
           </div>
-        </PlansProvider>
+          </PlansProvider>
+        </AuthProvider>
         <div id='popupPortal'></div>
       </body>
     </html>

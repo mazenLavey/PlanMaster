@@ -1,0 +1,71 @@
+@import "@/styles/index";
+
+.InputText {
+    display: flex;
+    flex-direction: column;
+    gap: 2;
+    flex-grow: 1;
+}
+
+.InputText__Wrapper {
+    position: relative;
+}
+
+.InputText__Label {
+    position: relative;
+    font-size: var(--font-300);
+    width: fit-content;
+    padding-left: 3px;
+
+    &::first-letter {
+        text-transform: capitalize;
+    }
+
+    &--Required::after {
+        content: "*";
+        position: absolute;
+        top: 0;
+        left: calc(100% + 5px);
+        color: $red;
+    }
+}
+
+.InputText__Input, .InputText__Textarea {
+    padding: $padding-s;
+    border-radius: $radius-s;
+    background-color: $gray-4;
+    color: $font-dark-gray;
+    border: 1px solid transparent;
+    width: 100%;
+
+    &:focus, &:hover {
+        background-color: $white;
+        border-color: $orange-0;
+        color: $font-black;
+    }
+
+    &::placeholder {
+        font-style: italic;
+        font-size: var(--font-200);
+    }
+
+    &--Error {
+        border-color: $red;
+        background-color: $red-1;
+        color: $font-black;
+    }
+}
+
+.InputText__Input {
+    height: 2rem;
+
+    &--Date {
+        color: $font-black;
+        width: 100%;
+    }
+}
+
+.InputText__ErrorMessage {
+    font-size: var(--font-200);
+    color: $red;
+}

@@ -50,3 +50,12 @@ export const OPERATIONS_TYPES: {
     delete: "delete",
 }
 
+export const ERROR_MESSAGES = {
+    invalid_email: "Invalid email format",
+    email_exist: "Email address is already registered",
+    required: "This field is required",
+    password: "Password should be at least 6 characters",
+    password_confirmation: "Passwords do not match",
+};
+
+export const FIREBASE_USER_REF = "users/";

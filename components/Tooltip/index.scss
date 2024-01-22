@@ -1,4 +1,4 @@
-@use "@/styles/variables" as *;
+@import "@/styles/index";
 
 .Tooltip {
     padding: 5px 10px;
@@ -7,17 +7,15 @@
     color: $font-white;
     font-size: 10px;
 
-    &::after {
-        position: absolute;
-        content: "";
-        top: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        border: 5px solid;
-        border-color: $black-1 transparent transparent transparent;
+    &--Disabled {
+        display: none;
     }
 }
 
 .Tooltip__Wrapper {
     width: fit-content;
+}
+
+.Tooltip__Arrow {
+    fill: $black-1;
 }

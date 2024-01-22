@@ -36,7 +36,7 @@
 }
 
 .TaskForm__Subtasks {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
 }
 
 .TaskForm__SubtasksTitle {
@@ -53,5 +53,9 @@
     color: $orange-0;
     text-transform: capitalize;
     cursor: pointer;
+
+    &:hover {
+        opacity: 0.5;
+    }
 }
 
