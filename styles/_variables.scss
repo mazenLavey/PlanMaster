@@ -21,19 +21,22 @@ $gray-3: #D1D1D6;
 $gray-4: #E5E5EA;
 $gray-5: #f4f4f4;
 $white: #fff;
-$green: #3ed364;
+$green: #00bf3b;
 $mint: #00C7BE;
 $teal: #30B0C7;
 $red: #ff746d;
+$red-1: #ffd4d2;
 $yellow: #FFCC00;
 $black-0: #3F4255;
 $black-1: #444444;
 $black-2: #a0a0a0;
+$lightPurple:#ecbaf28f;
+$lightBlue:#3ca0de1f;
 
 // background colors
 // $bg-lightBlue:#eff1f3;
-$bg-lightPurple:#ecbaf28f;
-$bg-lightBlue:#3ca0de1f;
+$bg-lightPurple:$lightPurple;
+$bg-lightBlue:$lightBlue;
 $bg-lightGray:#f4f3f4;
 
 // shadow colors

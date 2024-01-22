@@ -1,0 +1,22 @@
+.Login {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.Login__Input {
+    height: 2.5rem;
+}
+
+.Login__SubmitBtn {
+    width: 100%;
+    height: 42px;
+    max-width: unset !important;
+}
+
+.Login__Footer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 25px;
+}

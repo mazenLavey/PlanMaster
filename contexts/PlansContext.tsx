@@ -1,10 +1,13 @@
 "use client";
 
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { DataStorage, PlanType, TaskType} from "@/types/interfaces";
 import getRandomColors from "@/functions/getRandomColors";
-import { LOCAL_STORAGE_KEY, TASK_STAGES } from "@/constants";
+import { FIREBASE_USER_REF, LOCAL_STORAGE_KEY, TASK_STAGES } from "@/constants";
+import { onValue, ref, set } from "firebase/database";
+import { db } from "@/config/firbase";
+import { AuthContext } from "./AuthContext";
 
 type Props = {
     children: React.ReactNode
@@ -15,6 +18,7 @@ interface PlansContextType {
     deletedPlans: PlanType[],
     archivedPlans: PlanType[],
     currentPlan: PlanType | undefined,
+    isDataFetching: boolean,
     addNewPlan: () => void,
     showPlan: (planData: PlanType) => void,
     editPlanInfo: (formData: PlanType, planId: string) => void,
@@ -33,6 +37,7 @@ const PlansContext = createContext<PlansContextType>({
     currentPlan: undefined,
     deletedPlans: [],
     archivedPlans: [],
+    isDataFetching: true,
     addNewPlan: () => {},
     showPlan: (planData) => {},
     editPlanInfo: (formData, planId) => {},
@@ -48,31 +53,63 @@ const PlansContext = createContext<PlansContextType>({
 
 
 const PlansProvider: React.FC<Props> = ({children}) => {
+    const { isUserAuth, isLoading, user } = useContext(AuthContext);
+
     const [activePlans, setActivePlans] = useState<PlanType[]>([]);
     const [currentPlan, setCurrentPlan] = useState<PlanType | undefined>(undefined);
     const [deletedPlans, setDeletedPlans] = useState<PlanType[]>([]);
     const [archivedPlans, setArchivedPlans] = useState<PlanType[]>([]);
+    const [isDataFetching, setSsDataFetching] = useState<boolean>(true);
 
     useEffect(()=>{
-        const data: string | null = window.localStorage.getItem(LOCAL_STORAGE_KEY);
-            
-        if (data) {
-            const plans: DataStorage = JSON.parse(data);
-    
-            setActivePlans(plans.activePlans?? []);
-            setDeletedPlans(plans.deletedPlans?? []);
-            setArchivedPlans(plans.archivedPlans?? []);
+        if(isLoading) return;
+        setSsDataFetching(true);
+        const fetchDataFromLocalStorage = () => {
+            const data = window.localStorage.getItem(LOCAL_STORAGE_KEY);
+            if (!data) return;
+
+            const parsedData = JSON.parse(data);
+            setActivePlans(parsedData.activePlans ?? []);
+            setDeletedPlans(parsedData.deletedPlans ?? []);
+            setArchivedPlans(parsedData.archivedPlans ?? []);
+            setSsDataFetching(false);
         };
-    }, []);
+
+        if(isUserAuth && user) {
+            onValue(ref(db, FIREBASE_USER_REF + user?.uid), (snapshot) => {
+                const data = snapshot.val();
+                if(!data) return;
+
+                setActivePlans(data.plans?.activePlans?? []);
+                setDeletedPlans(data.plans?.deletedPlans?? []);
+                setArchivedPlans(data.plans?.archivedPlans?? []);    
+                setSsDataFetching(false);
+            }, {onlyOnce: true} );
+
+        } else {
+            fetchDataFromLocalStorage();
+        };
+    }, [isLoading, isUserAuth, user]);
 
     useEffect(()=>{
-        const addTolocalStorage = () => {
-            const plans: DataStorage = {
-                activePlans,
-                deletedPlans,
-                archivedPlans,
+        if(isLoading) return;
+
+        const plans: DataStorage = {
+            activePlans,
+            deletedPlans,
+            archivedPlans,
+        };
+
+        const saveData = () => {
+            if(isDataFetching) return;
+
+            if(isUserAuth) {
+                set(ref(db, FIREBASE_USER_REF + user?.uid), {
+                    plans,
+                });
+                return;
             };
-            
+
             window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(plans));
         };
         
@@ -87,15 +124,14 @@ const PlansProvider: React.FC<Props> = ({children}) => {
                     return activePlans[activePlans.length -1];
                 } 
             });
-            addTolocalStorage();
         } else {
-            addTolocalStorage();
             setCurrentPlan(undefined);
         }
-    }, [activePlans, deletedPlans, archivedPlans]);
+
+        saveData();
+    }, [activePlans, deletedPlans, archivedPlans, isLoading, isUserAuth, user, isDataFetching]);
 
     const addNewPlan = (): void => {
-
         const newPlan: PlanType = {
             id: nanoid(),
             timeStamp: new Date().getTime(),
@@ -115,7 +151,6 @@ const PlansProvider: React.FC<Props> = ({children}) => {
     };
 
     const editPlanInfo = (formData: PlanType, planId: string): void => {
-
         const {title, description, deadline} = formData;
         setActivePlans((prev) => {
             return prev.map(plan => {
@@ -231,7 +266,8 @@ const PlansProvider: React.FC<Props> = ({children}) => {
             activePlans, 
             deletedPlans,
             archivedPlans,
-            currentPlan, 
+            currentPlan,
+            isDataFetching,
             addNewPlan, 
             showPlan, 
             editPlanInfo, 

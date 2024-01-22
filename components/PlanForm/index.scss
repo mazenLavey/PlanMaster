@@ -9,35 +9,3 @@
     @include flex-column(false);
     gap: $gap-s;
 }
-
-.PlanForm__Label {
-    font-size: var(--font-400);
-
-    &::first-letter {
-        text-transform: capitalize;
-    }
-}
-
-.PlanForm__Input {
-    padding: $padding-s;
-    height: 2rem;
-    border-radius: $radius-s;
-    background-color: $gray-4;
-    color: $font-dark-gray;
-    border: 1px solid transparent;
-
-    &:focus {
-        background-color: $white;
-        border-color: $orange-0;
-        color: $font-black;
-    }
-
-    &::placeholder {
-        font-style: italic;
-    }
-
-    &--Date {
-        color: $font-black;
-        width: 100%;
-    }
-}

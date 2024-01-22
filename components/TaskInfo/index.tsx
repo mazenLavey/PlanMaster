@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { PlansContext } from "@/contexts/PlansContext";
 import { SubTask } from "@/types/interfaces";
 import { TaskType } from "@/types/interfaces";
-import SubtaskCheckbox from "../SubtaskCheckbox";
+import InputCheckbox from "@/components/InputCheckbox";
 import './index.scss';
 
 interface Props {
@@ -56,7 +56,7 @@ const TaskInfo: React.FC<Props> = ({taskData, planId}) => {
         const isDisabled = task.stage === "toDo" || task.stage === "done"? true: false;
 
         return (
-            <SubtaskCheckbox key={el.id} data={el} handleChange={handleChange} isChecked={isChecked} isDisabled={isDisabled} />
+            <InputCheckbox key={el.id} id={el.id} label={el.title} handleChange={handleChange} isChecked={isChecked} isDisabled={isDisabled} />
         );
     });
 

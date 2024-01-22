@@ -5,6 +5,7 @@ import Btn from "@/components/Btn";
 import { PlansContext } from "@/contexts/PlansContext";
 import { PlanType } from "@/types/interfaces";
 import { formatISO } from "date-fns";
+import InputText from "@/components/InputText";
 import "./index.scss";
 
 interface Props {
@@ -38,14 +39,9 @@ const PlanForm: React.FC<Props> = ({data, closePopup})=>{
     return (
         <form className="PlanForm" onSubmit={handleSubmit}>
             <div className="PlanForm__Inner">
-                <label className="PlanForm__Label" htmlFor="title">title</label>
-                <input className="PlanForm__Input" type="text" name="title" id="title" onChange={handleChange} value={formData.title} required placeholder="e.g. Learn Photoshop"/>
-
-                <label className="PlanForm__Label" htmlFor="description">descripe your plan</label>
-                <input className="PlanForm__Input" type="text" name="description" id="description" onChange={handleChange} value={formData.description} placeholder="e.g. I have to Learn the basics of photoshop ..."/>
-
-                <label className="PlanForm__Label" htmlFor="deadline">deadline</label>
-                <input className="PlanForm__Input PlanForm__Input--Date" type="date" name="deadline" id="deadline" onChange={handleChange} value={formData.deadline} min={todayDate}/>
+                <InputText label="title" name="title" id="title" placeholder="e.g. Learn Photoshop" onChange={handleChange} value={formData.title} required />
+                <InputText label="descripe your plan" name="description" id="description" placeholder="e.g. I have to Learn the basics of photoshop ..." onChange={handleChange} value={formData.description} />
+                <InputText label="deadline" type="date" name="deadline" id="deadline" onChange={handleChange} value={formData.deadline} min={todayDate} />
             </div>
             <Btn type="submit">
                 Save

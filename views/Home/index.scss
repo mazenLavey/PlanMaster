@@ -4,14 +4,13 @@
     display: grid;
     grid-template-rows: 1fr 1.5fr;
     align-items: center;
-    justify-content: center;
     height: calc(100vh - 110px);
     gap: 1rem;
-
 
     @include desktop {
         grid-template-rows: unset;
         grid-template-columns: 1fr 1fr;
+        justify-content: center;
     }
 }
 

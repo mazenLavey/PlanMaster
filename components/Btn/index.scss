@@ -2,24 +2,55 @@
 
 .Btn {
     @include flex-row(true);
-    gap: $gap-xs;
+    gap: 0.4rem;
     min-width: 70px;
     max-width: max-content;
     padding: $padding-s $padding-m;
     border-radius: $radius-l;
-    color: $font-white;
-    background-color: $orange-0;
-    text-transform: capitalize;
     font-size: var(--font-300);
     cursor: pointer;
+    transition: 0.2s;
+
+    &--Orange {
+        color: $font-white;
+        background-color: $orange-0;
+
+        @include desktop {
+            &:hover {
+                background-color: $orange-1;
+            }
+        }
+    }
+
+    &--White {
+        color: $font-black;
+        background-color: $white;
+
+        @include desktop {
+            &:hover {
+                background-color: $black-1;
+                color: $font-white;
+            }
+        }
+    }
+
+    &--Black {
+        background-color: $black-1;
+        color: $font-white;
+
+        @include desktop {
+            &:hover {
+                color: $font-black;
+                background-color: $white;
+            }
+        }
+    }
 
     &:active {
         scale: 0.98;
     }
 
-    @include desktop {
-        &:hover {
-            background-color: $orange-1;
-        }
+    &::first-letter {
+        text-transform: capitalize;
     }
 }

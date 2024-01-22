@@ -1,0 +1,17 @@
+@import '@/styles/index';
+
+.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    overflow-x: hidden;
+
+    @include exclude-mobile {
+        @include custom-scroll;
+    }
+}
+
+.App__Inner {
+    flex-grow: 1;
+}

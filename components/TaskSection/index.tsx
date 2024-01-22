@@ -10,11 +10,11 @@ interface Props {
 }
 
 const TaskSection: React.FC<Props> = ({currentPlanData, section})=>{
-    const tasksSum = currentPlanData.tasks.filter(task => task.stage === section).length;
+    const tasksSum = currentPlanData?.tasks?.filter(task => task.stage === section).length;
     const tasksSumText = tasksSum > 0? tasksSum : 0;
     const sectionTypeText = TASK_STAGES_TEXT[section];
     
-    const renderTasks = currentPlanData?.tasks.map((el, index) => {
+    const renderTasks = currentPlanData?.tasks?.map((el, index) => {
         if(el.stage === section) {
             return <TaskCard key={el.id} taskData={el} planId={currentPlanData.id}/>
         }});

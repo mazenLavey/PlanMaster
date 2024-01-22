@@ -26,4 +26,5 @@
 .TaskInfo__Subtasks {
     @include flex-column(false);
     gap: $gap-s;
+    padding-left: $padding-m;
 }
