@@ -30,7 +30,7 @@ const TaskCard: React.FC<Props> = ({taskData, planId})=>{
     useEffect(() => {
         if(!taskData) return;
 
-        const checkAllDone = taskData.subTasks.every(subtask => subtask.status === true);
+        const checkAllDone = taskData.subTasks?.every(subtask => subtask.status === true);
 
         setIsAllDone(checkAllDone);
         setTask(taskData);

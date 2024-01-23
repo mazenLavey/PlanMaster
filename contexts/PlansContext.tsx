@@ -253,7 +253,7 @@ const PlansProvider: React.FC<Props> = ({children}) => {
         
         if(!targetedPlan) return;
         const updataTasks: TaskType[] = targetedPlan.tasks.map(task => task.id === updatedTask.id? updatedTask : task);
-        const isFinished: boolean = updataTasks.every(task => task.stage === TASK_STAGES.done);
+        const isFinished: boolean = updataTasks?.every(task => task.stage === TASK_STAGES.done);
 
         setActivePlans(prev => {
             return prev.map(plan => {
