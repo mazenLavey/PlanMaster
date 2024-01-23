@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import Snackbar from '@/components/Snackbar';
+import { Analytics } from '@vercel/analytics/react';
 import './globals.scss';
 import './index.scss';
 
@@ -52,6 +53,7 @@ export default function RootLayout({
           </PlansProvider>
         </AuthProvider>
         <div id='popupPortal'></div>
+        <Analytics />
       </body>
     </html>
   )
