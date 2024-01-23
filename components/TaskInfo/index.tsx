@@ -39,7 +39,7 @@ const TaskInfo: React.FC<Props> = ({taskData, planId}) => {
             }
         });
 
-        const isAllSubtasksDone = updateSubTasks.every(subtask => subtask.status === true);
+        const isAllSubtasksDone = updateSubTasks?.every(subtask => subtask.status === true);
 
         const updatedTask: TaskType = {
             ...task,
