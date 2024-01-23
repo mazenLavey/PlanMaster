@@ -16,10 +16,14 @@ const Statistics: React.FC = () => {
     const finishedPlans = activePlans.filter(plan => plan.isFinished)?.length + archivedPlans?.length;
     
     const getTasksFromPlans = (plans: PlanType[] ): (TaskType | null)[] =>  {
+        if(!plans) return [];
+
         return plans.map(plan => plan?.tasks?.length === 0 ? null : plan.tasks).filter(task => task !== null).flat();
     };
 
     const filterTaskByStage = (tasks: (TaskType | null)[], stage: string) => {
+        if(!tasks) return 0;
+
         return tasks.filter(task => task?.stage === stage)?.length
     };
 
