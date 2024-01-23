@@ -1,8 +1,8 @@
 "use client";
 
+import { useContext, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import routes from "@/routes";
-import { useContext, useEffect } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import Btn from "@/components/Btn";
 import Tooltip from "@/components/Tooltip";
@@ -30,7 +30,7 @@ export const TooltipTextNode: React.FC = () => {
 }
 
 const UserAuthStatus: React.FC = () => {
-    const { isUserAuth, user, signOutUser, isLoading, showAuthNote, setShowAuthNote } = useContext(AuthContext);
+    const { isUserAuth, user, signOutUser, isLoading, showAuthNote, toggleAuthNote } = useContext(AuthContext);
     const route = useRouter();
     const pathname = usePathname();
 
@@ -48,21 +48,19 @@ const UserAuthStatus: React.FC = () => {
         route.push(routes.login)
     };
 
-    useEffect(()=> {
-        let disableNote: NodeJS.Timeout;
-
-        if (pathname === routes.dashboard && showAuthNote) {
-            disableNote = setTimeout(() => {
-                setShowAuthNote(false);
+    useEffect(() => {
+        if(pathname === routes.dashboard && showAuthNote) {
+            const disableNote = setTimeout(() => {
+                toggleAuthNote();
             }, 4000);
-        }
     
-        return () => {
-            clearTimeout(disableNote);
+            return () => {
+                clearTimeout(disableNote);
+            };
         };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [showAuthNote, pathname]);
 
     if(isLoading) {
         return <Btn color="white" className="UserAuthStatus__BtnLoading fade-in"><Spinner type="beat" color="lightgray" /></Btn>
