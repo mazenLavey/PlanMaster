@@ -1,5 +1,3 @@
-"use client"
-
 import { PlansProvider } from '@/contexts/PlansContext';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { Metadata } from 'next';

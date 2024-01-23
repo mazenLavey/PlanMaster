@@ -1,3 +1,5 @@
+"use client";
+
 import { ToastContainer, ToastOptions, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { TAlertType } from '@/types/interfaces';
