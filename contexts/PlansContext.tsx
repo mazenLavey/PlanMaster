@@ -67,7 +67,10 @@ const PlansProvider: React.FC<Props> = ({children}) => {
         setSsDataFetching(true);
         const fetchDataFromLocalStorage = () => {
             const data = window.localStorage.getItem(LOCAL_STORAGE_KEY);
-            if (!data) return;
+            if (!data) {
+                setSsDataFetching(false);
+                return;
+            };
 
             const parsedData = JSON.parse(data);
             setActivePlans(parsedData.activePlans ?? []);
@@ -79,7 +82,10 @@ const PlansProvider: React.FC<Props> = ({children}) => {
         if(isUserAuth && user) {
             onValue(ref(db, FIREBASE_USER_REF + user?.uid), (snapshot) => {
                 const data = snapshot.val();
-                if(!data) return;
+                if (!data) {
+                    setSsDataFetching(false);
+                    return;
+                };
 
                 setActivePlans(data.plans?.activePlans?? []);
                 setDeletedPlans(data.plans?.deletedPlans?? []);
