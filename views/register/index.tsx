@@ -11,7 +11,9 @@ import { useFormik } from 'formik';
 import { registerSchema } from '@/schema/auth';
 import InputPassword from "@/components/InputPassword";
 import InputCheckbox from "@/components/InputCheckbox";
+import { notify } from "@/components/Snackbar";
 import "./index.scss";
+import { AUTH_ERROR_MESSAGES } from "@/constants/firebase";
 
 const Register: React.FC = () => {
     const {createUserByEmail} = useContext(AuthContext);
@@ -32,8 +34,10 @@ const Register: React.FC = () => {
                 router.push(routes.dashboard);
                 actions.resetForm();
                 actions.setSubmitting(false);
-            } catch (err) {
-                console.error("[registration]", err)
+                notify.registered();
+            } catch (err: any) {
+                notify.error(AUTH_ERROR_MESSAGES[err.code]);
+                console.error("[registration]", err);
             }
         }
     });

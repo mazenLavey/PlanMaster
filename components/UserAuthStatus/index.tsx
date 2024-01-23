@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket, faCircleCheck, faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import useMedia from "@/hooks/useMedia";
 import classNames from "classnames";
+import { notify } from "@/components/Snackbar";
 import "./index.scss";
 
 const tooltipText = "Log in to seamlessly work on them across devices.";
@@ -33,8 +34,14 @@ const UserAuthStatus: React.FC = () => {
     const route = useRouter();
     const pathname = usePathname();
 
-    const handleLogOut = () => {
-        signOutUser();
+    const handleLogOut = async () => {
+        try {
+            await signOutUser();
+            notify.signedOut();
+        } catch(err) {
+            notify.error("networkError");
+            console.error('[signOutUser]', err);
+        }
     };
 
     const handleLogIn = () => {

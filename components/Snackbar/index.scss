@@ -1,0 +1,16 @@
+.CustomToast {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.CustomToast__Text {
+    font-size: var(--font-300);
+}
+
+
+@media (min-width: 576px) {
+    .CustomToast__Body {
+        border-radius: 12px;
+    }
+}

@@ -10,6 +10,8 @@ import routes from "@/routes";
 import { loginSchema } from "@/schema/auth";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
+import { notify } from '@/components/Snackbar';
+import { AUTH_ERROR_CODES, AUTH_ERROR_MESSAGES } from "@/constants/firebase";
 import "./index.scss";
 
 const Login: React.FC = () => {
@@ -29,8 +31,10 @@ const Login: React.FC = () => {
                 router.push(routes.dashboard);
                 actions.resetForm();
                 actions.setSubmitting(false);
-            } catch (err) {
-                console.error("[Login]", err)
+                notify.loggedIn();
+            } catch (err: any) {
+                notify.error(AUTH_ERROR_MESSAGES[err.code]);
+                console.error("[Login]", err);
             }
         }
     });

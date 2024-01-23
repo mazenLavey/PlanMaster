@@ -33,3 +33,5 @@ export interface DataStorage  {
     deletedPlans: PlanType[],
     archivedPlans: PlanType[],
 }
+
+export type TAlertType = "registered" | "loggedIn" | "signedOut" | "error";

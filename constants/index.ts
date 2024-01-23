@@ -57,5 +57,3 @@ export const ERROR_MESSAGES = {
     password: "Password should be at least 6 characters",
     password_confirmation: "Passwords do not match",
 };
-
-export const FIREBASE_USER_REF = "users/";
