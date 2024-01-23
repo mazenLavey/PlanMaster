@@ -1,28 +1,26 @@
 "use client"
 
-import 'chart.js/auto';
-import { Chart } from 'react-chartjs-2';
 import { useContext } from "react";
 import { PlansContext } from "@/contexts/PlansContext";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import SectionHeader from "@/components/SectionHeader";
 import { PLAN_STAGES, PLAN_STAGES_COLOR, TASK_STAGES, TASK_STAGES_COLOR } from '@/constants';
 import { PlanType, TaskType } from '@/types/interfaces';
-import "./index.scss";
 import DoughnutChart from '@/components/DoughnutChart';
 import BarChart from '@/components/BarChart';
+import "./index.scss";
 
 const Statistics: React.FC = () => {
     const {activePlans, deletedPlans, archivedPlans} = useContext(PlansContext);
 
-    const finishedPlans = activePlans.filter(plan => plan.isFinished).length + archivedPlans.length;
+    const finishedPlans = activePlans.filter(plan => plan.isFinished)?.length + archivedPlans?.length;
     
     const getTasksFromPlans = (plans: PlanType[] ): (TaskType | null)[] =>  {
-        return plans.map(plan => plan.tasks.length === 0 ? null : plan.tasks).filter(task => task !== null).flat();
+        return plans.map(plan => plan?.tasks?.length === 0 ? null : plan.tasks).filter(task => task !== null).flat();
     };
 
     const filterTaskByStage = (tasks: (TaskType | null)[], stage: string) => {
-        return tasks.filter(task => task?.stage === stage).length
+        return tasks.filter(task => task?.stage === stage)?.length
     };
 
     const finishedTasksFiltered = getTasksFromPlans(archivedPlans);
@@ -40,7 +38,7 @@ const Statistics: React.FC = () => {
             <div className="Statistics__Wrapper">
                 <DoughnutChart 
                     title='Plans' 
-                    data={[ activePlans.length, finishedPlans, deletedPlans.length ]} 
+                    data={[ activePlans?.length, finishedPlans, deletedPlans?.length ]} 
                     labels={[ PLAN_STAGES.active, PLAN_STAGES.finished, PLAN_STAGES.deleted ]} 
                     colors={[ PLAN_STAGES_COLOR.active, PLAN_STAGES_COLOR.finished, PLAN_STAGES_COLOR.deleted ]}/>
                 <BarChart
