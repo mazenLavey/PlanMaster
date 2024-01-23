@@ -1,8 +1,11 @@
+"use client"
+
 import { PlansProvider } from '@/contexts/PlansContext';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { Metadata } from 'next';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import Snackbar from '@/components/Snackbar';
 import './globals.scss';
 import './index.scss';
 
@@ -40,13 +43,14 @@ export default function RootLayout({
       <body>
         <AuthProvider>
           <PlansProvider>
-          <div className='App'>
-            <Nav />
-            <main className='App__Inner container'>
-              {children}
-            </main>
-            <Footer />
-          </div>
+            <div className='App'>
+              <Nav />
+              <main className='App__Inner container'>
+                {children}
+              </main>
+              <Footer />
+              <Snackbar />
+            </div>
           </PlansProvider>
         </AuthProvider>
         <div id='popupPortal'></div>
