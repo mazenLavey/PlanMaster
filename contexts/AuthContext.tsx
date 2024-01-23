@@ -23,7 +23,7 @@ interface AuthContextType {
     createUserByEmail: (email: string, password: string) => Promise<UserCredential>,
     signInUserByEmail: (email: string, password: string) => Promise<UserCredential>,
     signOutUser: () => Promise<void>,
-    setShowAuthNote: (status: boolean) => void,
+    toggleAuthNote: () => void,
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -34,7 +34,7 @@ const AuthContext = createContext<AuthContextType>({
     createUserByEmail: async (email, password) => Promise.resolve({} as UserCredential),
     signInUserByEmail: async (email, password) => Promise.resolve({} as UserCredential),
     signOutUser: async () => Promise.resolve(),
-    setShowAuthNote: (status) => {},
+    toggleAuthNote: () => {},
 });
 
 
@@ -71,6 +71,10 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
         });
     }, []);
 
+    const toggleAuthNote = () => {
+        setShowAuthNote(prev => !prev);
+    };
+
     return (
         <AuthContext.Provider value={{
             user,
@@ -80,7 +84,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
             createUserByEmail,
             signInUserByEmail,
             signOutUser,
-            setShowAuthNote,
+            toggleAuthNote,
         }}>
             {children}
         </AuthContext.Provider>
