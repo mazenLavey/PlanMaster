@@ -14,11 +14,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Plan Master',
     description: 'Stay organized and achieve more goals using a planning app for your tasks',
-    url: 'https://planmaster.netlify.app',
+    url: 'https://plan-master-pro.vercel.app',
     siteName: 'Plan Master',
     images: [
       {
-        url: '%PUBLIC_URL%/assets/og_img.png',
+        url: '%PUBLIC_URL%/assets/og_img.jpg',
       }
     ],
     locale: 'en-US',
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   twitter: {
     title: "Plan Master",
     description: "Stay organized and achieve more goals using a planning app for your tasks",
-    site: "https://planmaster.netlify.app",
-    images: "%PUBLIC_URL%/assets/og_img.png",
+    site: "https://plan-master-pro.vercel.app",
+    images: "%PUBLIC_URL%/assets/og_img.jpg",
   },
 }
 
