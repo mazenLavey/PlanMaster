@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     siteName: 'Plan Master',
     images: [
       {
-        url: 'https://planmaster.netlify.app/og_img.png',
+        url: '%PUBLIC_URL%/assets/og_img.png',
       }
     ],
     locale: 'en-US',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "Plan Master",
     description: "Stay organized and achieve more goals using a planning app for your tasks",
     site: "https://planmaster.netlify.app",
-    images: "https://planmaster.netlify.app/og_img.png",
+    images: "%PUBLIC_URL%/assets/og_img.png",
   },
 }
 
